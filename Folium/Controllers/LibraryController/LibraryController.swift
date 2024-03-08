@@ -143,7 +143,9 @@ class LibraryController : UICollectionViewController {
             contentConfiguration.secondaryTextProperties.color = .secondaryLabel
             contentConfiguration.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
             supplementaryView.contentConfiguration = contentConfiguration
-            
+
+            // TODO: this is a somewhat bad way of adding an accessory, if a supplementary view with an accessory goes too far off-screen it may appear on that section and another
+            // FIX: Adding an `else {}` to the `if {} else {}` statement with `supplementaryView.accessories = []` may work otherwise a custom UICollectionReusableView would work with `prepareForReuse`
             if let core = sectionIdentifier, !core.missingFiles.isEmpty {
                 var configuration = UIButton.Configuration.borderless()
                 configuration.buttonSize = .large
