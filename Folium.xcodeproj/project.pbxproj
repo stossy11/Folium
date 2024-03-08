@@ -1,0 +1,904 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E65DFCBB2B95A78300BDB6B2 /* libSoundTouch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */; };
+		E65DFCBF2B95ABF500BDB6B2 /* libteakra.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */; };
+		E670A9F72B8728E90006CBCD /* BlurredTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670A9F62B8728E90006CBCD /* BlurredTextButton.swift */; };
+		E670A9F92B8729200006CBCD /* BlurredImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670A9F82B8729200006CBCD /* BlurredImageButton.swift */; };
+		E673F3282B906044002F2B7D /* CytrusGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E673F3272B906044002F2B7D /* CytrusGame.swift */; };
+		E674A0AC2B90841D0052A49C /* libMoltenVK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */; };
+		E674A0AD2B90841D0052A49C /* libMoltenVK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E69647E52B90831F008F4759 /* CytrusEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69647E42B90831F008F4759 /* CytrusEmulationController.swift */; };
+		E69C45272B95E9DF00EF49B7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2DB2B95A2B700DF6F2A /* CoreBluetooth.framework */; };
+		E69C452B2B95F31E00EF49B7 /* ImportGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */; };
+		E69C45342B95F5C400EF49B7 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = E69C452F2B95F5C400EF49B7 /* fishhook.c */; };
+		E69C45352B95F5C400EF49B7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E69C45312B95F5C400EF49B7 /* LICENSE */; };
+		E69C45362B95F5C400EF49B7 /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E69C45332B95F5C400EF49B7 /* utils.m */; };
+		E69C45382B95F61A00EF49B7 /* JITEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = E69C45372B95F61A00EF49B7 /* JITEnabler.m */; };
+		E6ABB2A32B95999700DF6F2A /* SudachiGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ABB2A22B95999700DF6F2A /* SudachiGame.swift */; };
+		E6ABB2BC2B959F8100DF6F2A /* libOpenAL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2BB2B959F8100DF6F2A /* libOpenAL.xcframework */; };
+		E6ABB2C02B95A05C00DF6F2A /* libdynarmic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2BD2B95A05C00DF6F2A /* libdynarmic.xcframework */; };
+		E6ABB2C12B95A05C00DF6F2A /* libfmt.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2BE2B95A05C00DF6F2A /* libfmt.xcframework */; };
+		E6ABB2C22B95A05C00DF6F2A /* libmcl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2BF2B95A05C00DF6F2A /* libmcl.xcframework */; };
+		E6ABB2C42B95A0A900DF6F2A /* libcryptopp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2C32B95A0A900DF6F2A /* libcryptopp.xcframework */; };
+		E6ABB2C62B95A0C800DF6F2A /* libsirit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2C52B95A0C800DF6F2A /* libsirit.xcframework */; };
+		E6ABB2CA2B95A17100DF6F2A /* libmbedtls.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2C72B95A17100DF6F2A /* libmbedtls.xcframework */; };
+		E6ABB2CB2B95A17100DF6F2A /* libmbedcrypto.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2C82B95A17100DF6F2A /* libmbedcrypto.xcframework */; };
+		E6ABB2CC2B95A17100DF6F2A /* libmbedx509.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2C92B95A17100DF6F2A /* libmbedx509.xcframework */; };
+		E6ABB2DE2B95A32A00DF6F2A /* libSPIRV.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2DD2B95A32A00DF6F2A /* libSPIRV.xcframework */; };
+		E6ABB2E12B95A41D00DF6F2A /* SDL in Frameworks */ = {isa = PBXBuildFile; productRef = E6ABB2E02B95A41D00DF6F2A /* SDL */; };
+		E6ABB2E32B95A47400DF6F2A /* libenet.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2E22B95A47400DF6F2A /* libenet.xcframework */; };
+		E6ABB2E52B95A57900DF6F2A /* libopus.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2E42B95A57900DF6F2A /* libopus.xcframework */; };
+		E6AEBA142B95B5E6005E8433 /* libfaad.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA132B95B5E6005E8433 /* libfaad.xcframework */; };
+		E6AEBA182B95B64F005E8433 /* boost_iostreams.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA152B95B64F005E8433 /* boost_iostreams.xcframework */; };
+		E6AEBA192B95B64F005E8433 /* boost_program_options.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA162B95B64F005E8433 /* boost_program_options.xcframework */; };
+		E6AEBA1A2B95B64F005E8433 /* boost_serialization.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA172B95B64F005E8433 /* boost_serialization.xcframework */; };
+		E6AEBA1E2B95B699005E8433 /* libglslang.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA1B2B95B699005E8433 /* libglslang.xcframework */; };
+		E6AEBA1F2B95B699005E8433 /* libMachineIndependent.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA1C2B95B699005E8433 /* libMachineIndependent.xcframework */; };
+		E6AEBA202B95B699005E8433 /* libGenericCodeGen.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA1D2B95B699005E8433 /* libGenericCodeGen.xcframework */; };
+		E6AEBA292B95B92A005E8433 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = E6AEBA282B95B92A005E8433 /* OpenSSL */; };
+		E6AEBA2C2B95B94A005E8433 /* lz4 in Frameworks */ = {isa = PBXBuildFile; productRef = E6AEBA2B2B95B94A005E8433 /* lz4 */; };
+		E6AEBA392B95B998005E8433 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */; };
+		E6AEBA3A2B95B998005E8433 /* libavcodec.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6AEBA3B2B95B998005E8433 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2D2B95B98C005E8433 /* libavfilter.xcframework */; };
+		E6AEBA3C2B95B998005E8433 /* libavfilter.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2D2B95B98C005E8433 /* libavfilter.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6AEBA3D2B95B998005E8433 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA302B95B98C005E8433 /* libavformat.xcframework */; };
+		E6AEBA3E2B95B998005E8433 /* libavformat.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA302B95B98C005E8433 /* libavformat.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6AEBA3F2B95B998005E8433 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2E2B95B98C005E8433 /* libavutil.xcframework */; };
+		E6AEBA402B95B998005E8433 /* libavutil.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2E2B95B98C005E8433 /* libavutil.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6AEBA412B95B998005E8433 /* libswresample.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2F2B95B98C005E8433 /* libswresample.xcframework */; };
+		E6AEBA422B95B998005E8433 /* libswresample.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2F2B95B98C005E8433 /* libswresample.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6AEBA432B95B998005E8433 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA312B95B98C005E8433 /* libswscale.xcframework */; };
+		E6AEBA442B95B998005E8433 /* libswscale.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA312B95B98C005E8433 /* libswscale.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6AEBA462B95BA43005E8433 /* boost_context.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA452B95BA43005E8433 /* boost_context.xcframework */; };
+		E6C651AC2B8C5D4500EB0F71 /* GrapeEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */; };
+		E6C651B12B8C5E8700EB0F71 /* GrapeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */; };
+		E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651B22B8C5E9C00EB0F71 /* KiwiGame.swift */; };
+		E6D6ECD82B85E0BC00089AF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECD72B85E0BC00089AF2 /* AppDelegate.swift */; };
+		E6D6ECDA2B85E0BC00089AF2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECD92B85E0BC00089AF2 /* SceneDelegate.swift */; };
+		E6D6ECE12B85E0BE00089AF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6D6ECE02B85E0BE00089AF2 /* Assets.xcassets */; };
+		E6D6ECE42B85E0BE00089AF2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = E6D6ECE32B85E0BE00089AF2 /* Base */; };
+		E6D6ECFC2B85E71800089AF2 /* LibraryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECEC2B85E71800089AF2 /* LibraryController.swift */; };
+		E6D6ECFE2B85E71800089AF2 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECF02B85E71800089AF2 /* GameCell.swift */; };
+		E6D6ECFF2B85E71800089AF2 /* MissingFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECF12B85E71800089AF2 /* MissingFileCell.swift */; };
+		E6D6ED002B85E71800089AF2 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECF32B85E71800089AF2 /* LibraryManager.swift */; };
+		E6D6ED022B85E71800089AF2 /* VirtualControllerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECF62B85E71800089AF2 /* VirtualControllerButton.swift */; };
+		E6D6ED032B85E71800089AF2 /* VirtualControllerButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECF72B85E71800089AF2 /* VirtualControllerButtonDelegate.swift */; };
+		E6D6ED042B85E71800089AF2 /* VirtualControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECF82B85E71800089AF2 /* VirtualControllerView.swift */; };
+		E6D6ED052B85E71800089AF2 /* Bruno.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ECFA2B85E71800089AF2 /* Bruno.swift */; };
+		E6D6ED082B85E89C00089AF2 /* KiwiEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D6ED072B85E89C00089AF2 /* KiwiEmulationController.swift */; };
+		E6D6ED0B2B85E93800089AF2 /* Kiwi in Frameworks */ = {isa = PBXBuildFile; productRef = E6D6ED0A2B85E93800089AF2 /* Kiwi */; };
+		E6F3846D2B9AB2AD00A570F9 /* SudachiEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F3846C2B9AB2AD00A570F9 /* SudachiEmulationController.swift */; };
+		E6F384832B9B049300A570F9 /* MissingFilesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F384822B9B049300A570F9 /* MissingFilesController.swift */; };
+		E6F8D7072B8F0BAB00D2E15B /* Grape in Frameworks */ = {isa = PBXBuildFile; productRef = E6F8D7062B8F0BAB00D2E15B /* Grape */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E635836F2B95822E00D35422 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E635836B2B95822D00D35422 /* Sudachi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E63583612B95822D00D35422;
+			remoteInfo = Sudachi;
+		};
+		E673FDDE2B907118002F2B7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E673FDDA2B907117002F2B7D /* Cytrus.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E673FDD02B907117002F2B7D;
+			remoteInfo = Cytrus;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E674A0AE2B90841D0052A49C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E6AEBA3C2B95B998005E8433 /* libavfilter.xcframework in Embed Frameworks */,
+				E6AEBA3E2B95B998005E8433 /* libavformat.xcframework in Embed Frameworks */,
+				E674A0AD2B90841D0052A49C /* libMoltenVK.xcframework in Embed Frameworks */,
+				E6AEBA3A2B95B998005E8433 /* libavcodec.xcframework in Embed Frameworks */,
+				E6AEBA422B95B998005E8433 /* libswresample.xcframework in Embed Frameworks */,
+				E6AEBA442B95B998005E8433 /* libswscale.xcframework in Embed Frameworks */,
+				E6AEBA402B95B998005E8433 /* libavutil.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E635836B2B95822D00D35422 /* Sudachi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sudachi.xcodeproj; path = Sudachi/Sudachi.xcodeproj; sourceTree = "<group>"; };
+		E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libSoundTouch.xcframework; sourceTree = "<group>"; };
+		E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libteakra.xcframework; sourceTree = "<group>"; };
+		E670A9F62B8728E90006CBCD /* BlurredTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredTextButton.swift; sourceTree = "<group>"; };
+		E670A9F82B8729200006CBCD /* BlurredImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImageButton.swift; sourceTree = "<group>"; };
+		E673F3272B906044002F2B7D /* CytrusGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CytrusGame.swift; sourceTree = "<group>"; };
+		E673FDDA2B907117002F2B7D /* Cytrus.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cytrus.xcodeproj; path = Cytrus/Cytrus.xcodeproj; sourceTree = "<group>"; };
+		E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libMoltenVK.xcframework; sourceTree = "<group>"; };
+		E69647D72B908166008F4759 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		E69647E42B90831F008F4759 /* CytrusEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CytrusEmulationController.swift; sourceTree = "<group>"; };
+		E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportGamesCell.swift; sourceTree = "<group>"; };
+		E69C452D2B95F5C400EF49B7 /* Folium-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Folium-Bridging-Header.h"; sourceTree = "<group>"; };
+		E69C452E2B95F5C400EF49B7 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		E69C452F2B95F5C400EF49B7 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		E69C45302B95F5C400EF49B7 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		E69C45312B95F5C400EF49B7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E69C45332B95F5C400EF49B7 /* utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
+		E69C45372B95F61A00EF49B7 /* JITEnabler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JITEnabler.m; sourceTree = "<group>"; };
+		E6ABB2A22B95999700DF6F2A /* SudachiGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudachiGame.swift; sourceTree = "<group>"; };
+		E6ABB2BB2B959F8100DF6F2A /* libOpenAL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libOpenAL.xcframework; sourceTree = "<group>"; };
+		E6ABB2BD2B95A05C00DF6F2A /* libdynarmic.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libdynarmic.xcframework; sourceTree = "<group>"; };
+		E6ABB2BE2B95A05C00DF6F2A /* libfmt.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libfmt.xcframework; sourceTree = "<group>"; };
+		E6ABB2BF2B95A05C00DF6F2A /* libmcl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libmcl.xcframework; sourceTree = "<group>"; };
+		E6ABB2C32B95A0A900DF6F2A /* libcryptopp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libcryptopp.xcframework; sourceTree = "<group>"; };
+		E6ABB2C52B95A0C800DF6F2A /* libsirit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libsirit.xcframework; sourceTree = "<group>"; };
+		E6ABB2C72B95A17100DF6F2A /* libmbedtls.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libmbedtls.xcframework; sourceTree = "<group>"; };
+		E6ABB2C82B95A17100DF6F2A /* libmbedcrypto.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libmbedcrypto.xcframework; sourceTree = "<group>"; };
+		E6ABB2C92B95A17100DF6F2A /* libmbedx509.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libmbedx509.xcframework; sourceTree = "<group>"; };
+		E6ABB2DB2B95A2B700DF6F2A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E6ABB2DD2B95A32A00DF6F2A /* libSPIRV.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libSPIRV.xcframework; sourceTree = "<group>"; };
+		E6ABB2E22B95A47400DF6F2A /* libenet.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libenet.xcframework; sourceTree = "<group>"; };
+		E6ABB2E42B95A57900DF6F2A /* libopus.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libopus.xcframework; sourceTree = "<group>"; };
+		E6AEBA132B95B5E6005E8433 /* libfaad.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libfaad.xcframework; sourceTree = "<group>"; };
+		E6AEBA152B95B64F005E8433 /* boost_iostreams.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = boost_iostreams.xcframework; sourceTree = "<group>"; };
+		E6AEBA162B95B64F005E8433 /* boost_program_options.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = boost_program_options.xcframework; sourceTree = "<group>"; };
+		E6AEBA172B95B64F005E8433 /* boost_serialization.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = boost_serialization.xcframework; sourceTree = "<group>"; };
+		E6AEBA1B2B95B699005E8433 /* libglslang.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libglslang.xcframework; sourceTree = "<group>"; };
+		E6AEBA1C2B95B699005E8433 /* libMachineIndependent.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libMachineIndependent.xcframework; sourceTree = "<group>"; };
+		E6AEBA1D2B95B699005E8433 /* libGenericCodeGen.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libGenericCodeGen.xcframework; sourceTree = "<group>"; };
+		E6AEBA2D2B95B98C005E8433 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavfilter.xcframework; sourceTree = "<group>"; };
+		E6AEBA2E2B95B98C005E8433 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavutil.xcframework; sourceTree = "<group>"; };
+		E6AEBA2F2B95B98C005E8433 /* libswresample.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswresample.xcframework; sourceTree = "<group>"; };
+		E6AEBA302B95B98C005E8433 /* libavformat.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavformat.xcframework; sourceTree = "<group>"; };
+		E6AEBA312B95B98C005E8433 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswscale.xcframework; sourceTree = "<group>"; };
+		E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavcodec.xcframework; sourceTree = "<group>"; };
+		E6AEBA452B95BA43005E8433 /* boost_context.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = boost_context.xcframework; sourceTree = "<group>"; };
+		E6C651AA2B8C586C00EB0F71 /* Grape */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Grape; sourceTree = "<group>"; };
+		E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeEmulationController.swift; sourceTree = "<group>"; };
+		E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeGame.swift; sourceTree = "<group>"; };
+		E6C651B22B8C5E9C00EB0F71 /* KiwiGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KiwiGame.swift; sourceTree = "<group>"; };
+		E6D6ECD42B85E0BC00089AF2 /* Folium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Folium.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6D6ECD72B85E0BC00089AF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E6D6ECD92B85E0BC00089AF2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E6D6ECE02B85E0BE00089AF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E6D6ECE32B85E0BE00089AF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E6D6ECE52B85E0BE00089AF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6D6ECEB2B85E10D00089AF2 /* Kiwi */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Kiwi; sourceTree = "<group>"; };
+		E6D6ECEC2B85E71800089AF2 /* LibraryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryController.swift; sourceTree = "<group>"; };
+		E6D6ECF02B85E71800089AF2 /* GameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
+		E6D6ECF12B85E71800089AF2 /* MissingFileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissingFileCell.swift; sourceTree = "<group>"; };
+		E6D6ECF32B85E71800089AF2 /* LibraryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
+		E6D6ECF62B85E71800089AF2 /* VirtualControllerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualControllerButton.swift; sourceTree = "<group>"; };
+		E6D6ECF72B85E71800089AF2 /* VirtualControllerButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualControllerButtonDelegate.swift; sourceTree = "<group>"; };
+		E6D6ECF82B85E71800089AF2 /* VirtualControllerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualControllerView.swift; sourceTree = "<group>"; };
+		E6D6ECFA2B85E71800089AF2 /* Bruno.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bruno.swift; sourceTree = "<group>"; };
+		E6D6ED072B85E89C00089AF2 /* KiwiEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KiwiEmulationController.swift; sourceTree = "<group>"; };
+		E6D6ED0C2B86022000089AF2 /* Folium.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Folium.entitlements; sourceTree = "<group>"; };
+		E6F3846C2B9AB2AD00A570F9 /* SudachiEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudachiEmulationController.swift; sourceTree = "<group>"; };
+		E6F384822B9B049300A570F9 /* MissingFilesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingFilesController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E6D6ECD12B85E0BC00089AF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6ABB2E32B95A47400DF6F2A /* libenet.xcframework in Frameworks */,
+				E6AEBA1E2B95B699005E8433 /* libglslang.xcframework in Frameworks */,
+				E6AEBA2C2B95B94A005E8433 /* lz4 in Frameworks */,
+				E6AEBA3B2B95B998005E8433 /* libavfilter.xcframework in Frameworks */,
+				E6ABB2C62B95A0C800DF6F2A /* libsirit.xcframework in Frameworks */,
+				E6AEBA192B95B64F005E8433 /* boost_program_options.xcframework in Frameworks */,
+				E6AEBA202B95B699005E8433 /* libGenericCodeGen.xcframework in Frameworks */,
+				E6ABB2CC2B95A17100DF6F2A /* libmbedx509.xcframework in Frameworks */,
+				E6ABB2CA2B95A17100DF6F2A /* libmbedtls.xcframework in Frameworks */,
+				E6ABB2BC2B959F8100DF6F2A /* libOpenAL.xcframework in Frameworks */,
+				E65DFCBB2B95A78300BDB6B2 /* libSoundTouch.xcframework in Frameworks */,
+				E6ABB2DE2B95A32A00DF6F2A /* libSPIRV.xcframework in Frameworks */,
+				E6AEBA462B95BA43005E8433 /* boost_context.xcframework in Frameworks */,
+				E6ABB2C02B95A05C00DF6F2A /* libdynarmic.xcframework in Frameworks */,
+				E6AEBA3D2B95B998005E8433 /* libavformat.xcframework in Frameworks */,
+				E6AEBA182B95B64F005E8433 /* boost_iostreams.xcframework in Frameworks */,
+				E6F8D7072B8F0BAB00D2E15B /* Grape in Frameworks */,
+				E6AEBA1A2B95B64F005E8433 /* boost_serialization.xcframework in Frameworks */,
+				E69C45272B95E9DF00EF49B7 /* CoreBluetooth.framework in Frameworks */,
+				E6D6ED0B2B85E93800089AF2 /* Kiwi in Frameworks */,
+				E674A0AC2B90841D0052A49C /* libMoltenVK.xcframework in Frameworks */,
+				E6AEBA1F2B95B699005E8433 /* libMachineIndependent.xcframework in Frameworks */,
+				E6AEBA432B95B998005E8433 /* libswscale.xcframework in Frameworks */,
+				E6AEBA392B95B998005E8433 /* libavcodec.xcframework in Frameworks */,
+				E6AEBA142B95B5E6005E8433 /* libfaad.xcframework in Frameworks */,
+				E6ABB2C22B95A05C00DF6F2A /* libmcl.xcframework in Frameworks */,
+				E6AEBA412B95B998005E8433 /* libswresample.xcframework in Frameworks */,
+				E6AEBA292B95B92A005E8433 /* OpenSSL in Frameworks */,
+				E6ABB2E52B95A57900DF6F2A /* libopus.xcframework in Frameworks */,
+				E6ABB2E12B95A41D00DF6F2A /* SDL in Frameworks */,
+				E6ABB2C42B95A0A900DF6F2A /* libcryptopp.xcframework in Frameworks */,
+				E6ABB2C12B95A05C00DF6F2A /* libfmt.xcframework in Frameworks */,
+				E65DFCBF2B95ABF500BDB6B2 /* libteakra.xcframework in Frameworks */,
+				E6AEBA3F2B95B998005E8433 /* libavutil.xcframework in Frameworks */,
+				E6ABB2CB2B95A17100DF6F2A /* libmbedcrypto.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E635836C2B95822D00D35422 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E63583702B95822E00D35422 /* libSudachi.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E670A9F52B8728DC0006CBCD /* BlurredButtons */ = {
+			isa = PBXGroup;
+			children = (
+				E670A9F62B8728E90006CBCD /* BlurredTextButton.swift */,
+				E670A9F82B8729200006CBCD /* BlurredImageButton.swift */,
+			);
+			path = BlurredButtons;
+			sourceTree = "<group>";
+		};
+		E673FDDB2B907117002F2B7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E673FDDF2B907118002F2B7D /* libCytrus.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E674A0A82B9083EA0052A49C /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				E674A0A92B9083F10052A49C /* XCFrameworks */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		E674A0A92B9083F10052A49C /* XCFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */,
+				E6AEBA2D2B95B98C005E8433 /* libavfilter.xcframework */,
+				E6AEBA302B95B98C005E8433 /* libavformat.xcframework */,
+				E6AEBA2E2B95B98C005E8433 /* libavutil.xcframework */,
+				E6AEBA2F2B95B98C005E8433 /* libswresample.xcframework */,
+				E6AEBA312B95B98C005E8433 /* libswscale.xcframework */,
+				E6AEBA1D2B95B699005E8433 /* libGenericCodeGen.xcframework */,
+				E6AEBA1B2B95B699005E8433 /* libglslang.xcframework */,
+				E6AEBA1C2B95B699005E8433 /* libMachineIndependent.xcframework */,
+				E6AEBA452B95BA43005E8433 /* boost_context.xcframework */,
+				E6AEBA152B95B64F005E8433 /* boost_iostreams.xcframework */,
+				E6AEBA162B95B64F005E8433 /* boost_program_options.xcframework */,
+				E6AEBA172B95B64F005E8433 /* boost_serialization.xcframework */,
+				E6ABB2C32B95A0A900DF6F2A /* libcryptopp.xcframework */,
+				E6ABB2BD2B95A05C00DF6F2A /* libdynarmic.xcframework */,
+				E6ABB2E22B95A47400DF6F2A /* libenet.xcframework */,
+				E6AEBA132B95B5E6005E8433 /* libfaad.xcframework */,
+				E6ABB2BE2B95A05C00DF6F2A /* libfmt.xcframework */,
+				E6ABB2C82B95A17100DF6F2A /* libmbedcrypto.xcframework */,
+				E6ABB2C72B95A17100DF6F2A /* libmbedtls.xcframework */,
+				E6ABB2C92B95A17100DF6F2A /* libmbedx509.xcframework */,
+				E6ABB2BF2B95A05C00DF6F2A /* libmcl.xcframework */,
+				E6ABB2BB2B959F8100DF6F2A /* libOpenAL.xcframework */,
+				E6ABB2E42B95A57900DF6F2A /* libopus.xcframework */,
+				E6ABB2C52B95A0C800DF6F2A /* libsirit.xcframework */,
+				E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */,
+				E6ABB2DD2B95A32A00DF6F2A /* libSPIRV.xcframework */,
+				E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */,
+				E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */,
+			);
+			path = XCFrameworks;
+			sourceTree = "<group>";
+		};
+		E69C452C2B95F59F00EF49B7 /* JITEnabler */ = {
+			isa = PBXGroup;
+			children = (
+				E69C45322B95F5C400EF49B7 /* fishhook */,
+				E69C452E2B95F5C400EF49B7 /* utils.h */,
+				E69C45332B95F5C400EF49B7 /* utils.m */,
+				E69C45372B95F61A00EF49B7 /* JITEnabler.m */,
+			);
+			path = JITEnabler;
+			sourceTree = "<group>";
+		};
+		E69C45322B95F5C400EF49B7 /* fishhook */ = {
+			isa = PBXGroup;
+			children = (
+				E69C452F2B95F5C400EF49B7 /* fishhook.c */,
+				E69C45302B95F5C400EF49B7 /* fishhook.h */,
+				E69C45312B95F5C400EF49B7 /* LICENSE */,
+			);
+			path = fishhook;
+			sourceTree = "<group>";
+		};
+		E6C651AF2B8C5E5A00EB0F71 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				E673F3272B906044002F2B7D /* CytrusGame.swift */,
+				E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */,
+				E6C651B22B8C5E9C00EB0F71 /* KiwiGame.swift */,
+				E6ABB2A22B95999700DF6F2A /* SudachiGame.swift */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		E6D6ECCB2B85E0BC00089AF2 = {
+			isa = PBXGroup;
+			children = (
+				E673FDDA2B907117002F2B7D /* Cytrus.xcodeproj */,
+				E6C651AA2B8C586C00EB0F71 /* Grape */,
+				E6D6ECEB2B85E10D00089AF2 /* Kiwi */,
+				E635836B2B95822D00D35422 /* Sudachi.xcodeproj */,
+				E6D6ECD62B85E0BC00089AF2 /* Folium */,
+				E6D6ECD52B85E0BC00089AF2 /* Products */,
+				E6D6ED092B85E93800089AF2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E6D6ECD52B85E0BC00089AF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E6D6ECD42B85E0BC00089AF2 /* Folium.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E6D6ECD62B85E0BC00089AF2 /* Folium */ = {
+			isa = PBXGroup;
+			children = (
+				E6D6ED0C2B86022000089AF2 /* Folium.entitlements */,
+				E6D6ECFB2B85E71800089AF2 /* Classes */,
+				E6D6ECEF2B85E71800089AF2 /* Controllers */,
+				E674A0A82B9083EA0052A49C /* Dependencies */,
+				E6D6ECD72B85E0BC00089AF2 /* AppDelegate.swift */,
+				E6D6ECD92B85E0BC00089AF2 /* SceneDelegate.swift */,
+				E6D6ECE02B85E0BE00089AF2 /* Assets.xcassets */,
+				E6D6ECE22B85E0BE00089AF2 /* LaunchScreen.storyboard */,
+				E6D6ECE52B85E0BE00089AF2 /* Info.plist */,
+				E69C452D2B95F5C400EF49B7 /* Folium-Bridging-Header.h */,
+			);
+			path = Folium;
+			sourceTree = "<group>";
+		};
+		E6D6ECEE2B85E71800089AF2 /* LibraryController */ = {
+			isa = PBXGroup;
+			children = (
+				E6D6ECEC2B85E71800089AF2 /* LibraryController.swift */,
+				E6F384822B9B049300A570F9 /* MissingFilesController.swift */,
+			);
+			path = LibraryController;
+			sourceTree = "<group>";
+		};
+		E6D6ECEF2B85E71800089AF2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E6D6ED062B85E88E00089AF2 /* EmulationControllers */,
+				E6D6ECEE2B85E71800089AF2 /* LibraryController */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E6D6ECF22B85E71800089AF2 /* LibraryCells */ = {
+			isa = PBXGroup;
+			children = (
+				E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */,
+				E6D6ECF02B85E71800089AF2 /* GameCell.swift */,
+				E6D6ECF12B85E71800089AF2 /* MissingFileCell.swift */,
+			);
+			path = LibraryCells;
+			sourceTree = "<group>";
+		};
+		E6D6ECF52B85E71800089AF2 /* LibraryManager */ = {
+			isa = PBXGroup;
+			children = (
+				E6C651AF2B8C5E5A00EB0F71 /* Games */,
+				E6D6ECF32B85E71800089AF2 /* LibraryManager.swift */,
+			);
+			path = LibraryManager;
+			sourceTree = "<group>";
+		};
+		E6D6ECF92B85E71800089AF2 /* VirtualController */ = {
+			isa = PBXGroup;
+			children = (
+				E6D6ECF62B85E71800089AF2 /* VirtualControllerButton.swift */,
+				E6D6ECF72B85E71800089AF2 /* VirtualControllerButtonDelegate.swift */,
+				E6D6ECF82B85E71800089AF2 /* VirtualControllerView.swift */,
+			);
+			path = VirtualController;
+			sourceTree = "<group>";
+		};
+		E6D6ECFB2B85E71800089AF2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E69C452C2B95F59F00EF49B7 /* JITEnabler */,
+				E670A9F52B8728DC0006CBCD /* BlurredButtons */,
+				E6D6ECF22B85E71800089AF2 /* LibraryCells */,
+				E6D6ECF52B85E71800089AF2 /* LibraryManager */,
+				E6D6ECF92B85E71800089AF2 /* VirtualController */,
+				E6D6ECFA2B85E71800089AF2 /* Bruno.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E6D6ED062B85E88E00089AF2 /* EmulationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E69647E42B90831F008F4759 /* CytrusEmulationController.swift */,
+				E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */,
+				E6D6ED072B85E89C00089AF2 /* KiwiEmulationController.swift */,
+				E6F3846C2B9AB2AD00A570F9 /* SudachiEmulationController.swift */,
+			);
+			path = EmulationControllers;
+			sourceTree = "<group>";
+		};
+		E6D6ED092B85E93800089AF2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6ABB2DB2B95A2B700DF6F2A /* CoreBluetooth.framework */,
+				E69647D72B908166008F4759 /* GameController.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E6D6ECD32B85E0BC00089AF2 /* Folium */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6D6ECE82B85E0BE00089AF2 /* Build configuration list for PBXNativeTarget "Folium" */;
+			buildPhases = (
+				E6D6ECD02B85E0BC00089AF2 /* Sources */,
+				E6D6ECD12B85E0BC00089AF2 /* Frameworks */,
+				E6D6ECD22B85E0BC00089AF2 /* Resources */,
+				E674A0AE2B90841D0052A49C /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Folium;
+			packageProductDependencies = (
+				E6D6ED0A2B85E93800089AF2 /* Kiwi */,
+				E6F8D7062B8F0BAB00D2E15B /* Grape */,
+				E6ABB2E02B95A41D00DF6F2A /* SDL */,
+				E6AEBA282B95B92A005E8433 /* OpenSSL */,
+				E6AEBA2B2B95B94A005E8433 /* lz4 */,
+			);
+			productName = Folium;
+			productReference = E6D6ECD42B85E0BC00089AF2 /* Folium.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E6D6ECCC2B85E0BC00089AF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					E6D6ECD32B85E0BC00089AF2 = {
+						CreatedOnToolsVersion = 15.3;
+						LastSwiftMigration = 1530;
+					};
+				};
+			};
+			buildConfigurationList = E6D6ECCF2B85E0BC00089AF2 /* Build configuration list for PBXProject "Folium" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E6D6ECCB2B85E0BC00089AF2;
+			packageReferences = (
+				E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */,
+				E6AEBA272B95B92A005E8433 /* XCRemoteSwiftPackageReference "OpenSSL" */,
+				E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */,
+			);
+			productRefGroup = E6D6ECD52B85E0BC00089AF2 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E673FDDB2B907117002F2B7D /* Products */;
+					ProjectRef = E673FDDA2B907117002F2B7D /* Cytrus.xcodeproj */;
+				},
+				{
+					ProductGroup = E635836C2B95822D00D35422 /* Products */;
+					ProjectRef = E635836B2B95822D00D35422 /* Sudachi.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				E6D6ECD32B85E0BC00089AF2 /* Folium */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E63583702B95822E00D35422 /* libSudachi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSudachi.a;
+			remoteRef = E635836F2B95822E00D35422 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E673FDDF2B907118002F2B7D /* libCytrus.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCytrus.a;
+			remoteRef = E673FDDE2B907118002F2B7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E6D6ECD22B85E0BC00089AF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E69C45352B95F5C400EF49B7 /* LICENSE in Resources */,
+				E6D6ECE12B85E0BE00089AF2 /* Assets.xcassets in Resources */,
+				E6D6ECE42B85E0BE00089AF2 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E6D6ECD02B85E0BC00089AF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6ABB2A32B95999700DF6F2A /* SudachiGame.swift in Sources */,
+				E69C45342B95F5C400EF49B7 /* fishhook.c in Sources */,
+				E69C45382B95F61A00EF49B7 /* JITEnabler.m in Sources */,
+				E670A9F92B8729200006CBCD /* BlurredImageButton.swift in Sources */,
+				E6D6ED052B85E71800089AF2 /* Bruno.swift in Sources */,
+				E69C452B2B95F31E00EF49B7 /* ImportGamesCell.swift in Sources */,
+				E6D6ECFE2B85E71800089AF2 /* GameCell.swift in Sources */,
+				E6D6ECD82B85E0BC00089AF2 /* AppDelegate.swift in Sources */,
+				E6D6ED002B85E71800089AF2 /* LibraryManager.swift in Sources */,
+				E6F384832B9B049300A570F9 /* MissingFilesController.swift in Sources */,
+				E6D6ECFC2B85E71800089AF2 /* LibraryController.swift in Sources */,
+				E6D6ECDA2B85E0BC00089AF2 /* SceneDelegate.swift in Sources */,
+				E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */,
+				E6D6ED032B85E71800089AF2 /* VirtualControllerButtonDelegate.swift in Sources */,
+				E6D6ED042B85E71800089AF2 /* VirtualControllerView.swift in Sources */,
+				E69C45362B95F5C400EF49B7 /* utils.m in Sources */,
+				E69647E52B90831F008F4759 /* CytrusEmulationController.swift in Sources */,
+				E673F3282B906044002F2B7D /* CytrusGame.swift in Sources */,
+				E6D6ED082B85E89C00089AF2 /* KiwiEmulationController.swift in Sources */,
+				E6D6ECFF2B85E71800089AF2 /* MissingFileCell.swift in Sources */,
+				E6D6ED022B85E71800089AF2 /* VirtualControllerButton.swift in Sources */,
+				E6F3846D2B9AB2AD00A570F9 /* SudachiEmulationController.swift in Sources */,
+				E6C651AC2B8C5D4500EB0F71 /* GrapeEmulationController.swift in Sources */,
+				E6C651B12B8C5E8700EB0F71 /* GrapeGame.swift in Sources */,
+				E670A9F72B8728E90006CBCD /* BlurredTextButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E6D6ECE22B85E0BE00089AF2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6D6ECE32B85E0BE00089AF2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E6D6ECE62B85E0BE00089AF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT = NO;
+				HEADERMAP_INCLUDES_PROJECT_HEADERS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lSudachi";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Folium/Folium-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		E6D6ECE72B85E0BE00089AF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT = NO;
+				HEADERMAP_INCLUDES_PROJECT_HEADERS = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lSudachi";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "Folium/Folium-Bridging-Header.h";
+				USE_HEADERMAP = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E6D6ECE92B85E0BE00089AF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = Z3ZEABYY6P;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Folium/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Folium uses your local network to provide P2P multiplayer support";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
+				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Folium/Folium-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objc;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		E6D6ECEA2B85E0BE00089AF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = Z3ZEABYY6P;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Folium/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Folium uses your local network to provide P2P multiplayer support";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
+				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Folium/Folium-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objc;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E6D6ECCF2B85E0BC00089AF2 /* Build configuration list for PBXProject "Folium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6D6ECE62B85E0BE00089AF2 /* Debug */,
+				E6D6ECE72B85E0BE00089AF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6D6ECE82B85E0BE00089AF2 /* Build configuration list for PBXNativeTarget "Folium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6D6ECE92B85E0BE00089AF2 /* Debug */,
+				E6D6ECEA2B85E0BE00089AF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ctreffs/SwiftSDL2";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+		E6AEBA272B95B92A005E8433 /* XCRemoteSwiftPackageReference "OpenSSL" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/OpenSSL";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.4000;
+			};
+		};
+		E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/milch/lz4-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6ABB2E02B95A41D00DF6F2A /* SDL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */;
+			productName = SDL;
+		};
+		E6AEBA282B95B92A005E8433 /* OpenSSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6AEBA272B95B92A005E8433 /* XCRemoteSwiftPackageReference "OpenSSL" */;
+			productName = OpenSSL;
+		};
+		E6AEBA2B2B95B94A005E8433 /* lz4 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */;
+			productName = lz4;
+		};
+		E6D6ED0A2B85E93800089AF2 /* Kiwi */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Kiwi;
+		};
+		E6F8D7062B8F0BAB00D2E15B /* Grape */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Grape;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = E6D6ECCC2B85E0BC00089AF2 /* Project object */;
+}

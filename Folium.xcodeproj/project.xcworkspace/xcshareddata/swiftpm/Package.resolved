@@ -1,0 +1,42 @@
+{
+  "originHash" : "a79800c341bd1dfb79c1114f1af8bd5a3ebf727660ab896cb450945f19d71f0d",
+  "pins" : [
+    {
+      "identity" : "lz4-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/milch/lz4-spm",
+      "state" : {
+        "revision" : "9e6aa5e4e833e6454ba3a357250dd4eb31c48f99",
+        "version" : "1.9.3"
+      }
+    },
+    {
+      "identity" : "openssl",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krzyzanowskim/OpenSSL",
+      "state" : {
+        "revision" : "2fec2333eb8e8a6acd08bc95a6edf1c0f391c42f",
+        "version" : "3.1.4000"
+      }
+    },
+    {
+      "identity" : "swiftsdl2",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ctreffs/SwiftSDL2",
+      "state" : {
+        "revision" : "30a2886bd68e43fc19ba29b63ffe230ac0e4db7a",
+        "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "zstd",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/zstd",
+      "state" : {
+        "branch" : "dev",
+        "revision" : "8689633fdf5dabfc7f4cd6f79611335c3f8def88"
+      }
+    }
+  ],
+  "version" : 3
+}

@@ -1,0 +1,12 @@
+[submodule "Kiwi"]
+	path = Kiwi
+	url = https://github.com/jarrodnorwell/Kiwi
+[submodule "Grape"]
+	path = Grape
+	url = https://github.com/jarrodnorwell/Grape
+[submodule "Cytrus"]
+	path = Cytrus
+	url = https://github.com/jarrodnorwell/Cytrus
+[submodule "Sudachi"]
+	path = Sudachi
+	url = https://github.com/jarrodnorwell/Sudachi
