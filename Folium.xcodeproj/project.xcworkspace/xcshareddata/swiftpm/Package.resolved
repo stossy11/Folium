@@ -1,5 +1,5 @@
 {
-  "originHash" : "a79800c341bd1dfb79c1114f1af8bd5a3ebf727660ab896cb450945f19d71f0d",
+  "originHash" : "476c840f724854dece1298ecbe6341bafd7e71878057e5ab8fc691b8a8e0a5d5",
   "pins" : [
     {
       "identity" : "lz4-spm",
@@ -20,6 +20,15 @@
       }
     },
     {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
+        "version" : "510.0.1"
+      }
+    },
+    {
       "identity" : "swiftsdl2",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ctreffs/SwiftSDL2",
@@ -34,7 +43,7 @@
       "location" : "https://github.com/facebook/zstd",
       "state" : {
         "branch" : "dev",
-        "revision" : "8689633fdf5dabfc7f4cd6f79611335c3f8def88"
+        "revision" : "372fddf4e6a6db6776b745f31c02a7c8c8dfc83f"
       }
     }
   ],

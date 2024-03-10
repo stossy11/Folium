@@ -14,6 +14,8 @@
 		E673F3282B906044002F2B7D /* CytrusGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E673F3272B906044002F2B7D /* CytrusGame.swift */; };
 		E674A0AC2B90841D0052A49C /* libMoltenVK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */; };
 		E674A0AD2B90841D0052A49C /* libMoltenVK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E690393F2B9D5C6E00F6D78D /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = E690393E2B9D5C6E00F6D78D /* SwiftSyntax */; };
+		E69039412B9D5C6E00F6D78D /* SwiftSyntaxMacros in Frameworks */ = {isa = PBXBuildFile; productRef = E69039402B9D5C6E00F6D78D /* SwiftSyntaxMacros */; };
 		E69647E52B90831F008F4759 /* CytrusEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69647E42B90831F008F4759 /* CytrusEmulationController.swift */; };
 		E69C45272B95E9DF00EF49B7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2DB2B95A2B700DF6F2A /* CoreBluetooth.framework */; };
 		E69C452B2B95F31E00EF49B7 /* ImportGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */; };
@@ -198,6 +200,7 @@
 				E6AEBA2C2B95B94A005E8433 /* lz4 in Frameworks */,
 				E6AEBA3B2B95B998005E8433 /* libavfilter.xcframework in Frameworks */,
 				E6ABB2C62B95A0C800DF6F2A /* libsirit.xcframework in Frameworks */,
+				E69039412B9D5C6E00F6D78D /* SwiftSyntaxMacros in Frameworks */,
 				E6AEBA192B95B64F005E8433 /* boost_program_options.xcframework in Frameworks */,
 				E6AEBA202B95B699005E8433 /* libGenericCodeGen.xcframework in Frameworks */,
 				E6ABB2CC2B95A17100DF6F2A /* libmbedx509.xcframework in Frameworks */,
@@ -224,6 +227,7 @@
 				E6ABB2E52B95A57900DF6F2A /* libopus.xcframework in Frameworks */,
 				E6ABB2E12B95A41D00DF6F2A /* SDL in Frameworks */,
 				E6ABB2C42B95A0A900DF6F2A /* libcryptopp.xcframework in Frameworks */,
+				E690393F2B9D5C6E00F6D78D /* SwiftSyntax in Frameworks */,
 				E6ABB2C12B95A05C00DF6F2A /* libfmt.xcframework in Frameworks */,
 				E65DFCBF2B95ABF500BDB6B2 /* libteakra.xcframework in Frameworks */,
 				E6AEBA3F2B95B998005E8433 /* libavutil.xcframework in Frameworks */,
@@ -476,6 +480,8 @@
 				E6ABB2E02B95A41D00DF6F2A /* SDL */,
 				E6AEBA282B95B92A005E8433 /* OpenSSL */,
 				E6AEBA2B2B95B94A005E8433 /* lz4 */,
+				E690393E2B9D5C6E00F6D78D /* SwiftSyntax */,
+				E69039402B9D5C6E00F6D78D /* SwiftSyntaxMacros */,
 			);
 			productName = Folium;
 			productReference = E6D6ECD42B85E0BC00089AF2 /* Folium.app */;
@@ -510,6 +516,7 @@
 				E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */,
 				E6AEBA272B95B92A005E8433 /* XCRemoteSwiftPackageReference "OpenSSL" */,
 				E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */,
+				E690393D2B9D5C6E00F6D78D /* XCRemoteSwiftPackageReference "swift-syntax" */,
 			);
 			productRefGroup = E6D6ECD52B85E0BC00089AF2 /* Products */;
 			projectDirPath = "";
@@ -746,7 +753,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -757,6 +764,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Folium uses your local network to provide P2P multiplayer support";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Folium uses your microphone for in-game audio input";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -791,7 +799,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -799,6 +807,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Folium uses your local network to provide P2P multiplayer support";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Folium uses your microphone for in-game audio input";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -848,6 +857,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E690393D2B9D5C6E00F6D78D /* XCRemoteSwiftPackageReference "swift-syntax" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-syntax";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 510.0.1;
+			};
+		};
 		E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ctreffs/SwiftSDL2";
@@ -875,6 +892,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E690393E2B9D5C6E00F6D78D /* SwiftSyntax */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E690393D2B9D5C6E00F6D78D /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntax;
+		};
+		E69039402B9D5C6E00F6D78D /* SwiftSyntaxMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E690393D2B9D5C6E00F6D78D /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntaxMacros;
+		};
 		E6ABB2E02B95A41D00DF6F2A /* SDL */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */;

@@ -219,7 +219,7 @@ class LibraryManager {
                             }
 #if canImport(Sudachi)
                         case .sudachi:
-                            if ["nro", "nso", "nsp", "xci"].contains(url.pathExtension.lowercased()) {
+                            if ["nca", "nro", "nso", "nsp", "xci"].contains(url.pathExtension.lowercased()) {
                                 urls.append(url)
                             }
 #endif

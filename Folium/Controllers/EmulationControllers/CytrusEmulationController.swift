@@ -14,8 +14,164 @@ import MetalKit.MTKView
 import UIKit
 
 /*
- TODO: add landscape support
+ MARK: Supported
+ - Physical Controller
+ - Virtual Controller
+ - Landscape Orientation (Partial)
+ - Touch Input (Portrait Only)
+ - Audio Output
+ - Audio Input
+ - Video Output
  */
+
+class KeyboardController : UIViewController, UITextFieldDelegate {
+    var visualEffectView: UIVisualEffectView!
+    
+    var bottomConstraint, bottomBackupConstraint: NSLayoutConstraint!
+    
+    var keyboardConfig: KeyboardConfig
+    init(keyboardConfig: KeyboardConfig) {
+        self.keyboardConfig = keyboardConfig
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
+        
+        visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+        visualEffectView.clipsToBounds = true
+        visualEffectView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        visualEffectView.layer.borderWidth = 2
+        visualEffectView.layer.cornerCurve = .continuous
+        visualEffectView.layer.cornerRadius = 35
+        view.addSubview(visualEffectView)
+        bottomConstraint = visualEffectView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        bottomBackupConstraint = bottomConstraint
+        view.addConstraints([
+            visualEffectView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            bottomConstraint,
+            visualEffectView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        ])
+        
+        let textField = MinimalRoundedTextField(keyboardConfig.hintText, .all)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
+        visualEffectView.contentView.addSubview(textField)
+        view.addConstraints([
+            textField.topAnchor.constraint(equalTo: visualEffectView.contentView.topAnchor, constant: 20),
+            textField.leadingAnchor.constraint(equalTo: visualEffectView.contentView.leadingAnchor, constant: 20),
+            textField.trailingAnchor.constraint(equalTo: visualEffectView.contentView.trailingAnchor, constant: -20),
+            textField.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        
+        var buttons: [UIButton] = []
+        switch keyboardConfig.buttonConfig {
+        case .single:
+            var configuration = UIButton.Configuration.filled()
+            configuration.attributedTitle = .init("Okay", attributes: .init([
+                .font : UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize)
+            ]))
+            configuration.buttonSize = .large
+            configuration.cornerStyle = .capsule
+            
+            buttons.append(.init(configuration: configuration, primaryAction: .init(handler: { _ in
+                NotificationCenter.default.post(name: .init("closeKeyboard"), object: nil, userInfo: [
+                    "buttonPressed" : 0
+                ])
+                self.dismiss(animated: true)
+            })))
+        case .dual:
+            var cancelConfiguration = UIButton.Configuration.filled()
+            cancelConfiguration.attributedTitle = .init("Cancel", attributes: .init([
+                .font : UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize)
+            ]))
+            cancelConfiguration.buttonSize = .large
+            cancelConfiguration.cornerStyle = .capsule
+            
+            var okayConfiguration = UIButton.Configuration.filled()
+            okayConfiguration.attributedTitle = .init("Okay", attributes: .init([
+                .font : UIFont.boldSystemFont(ofSize: UIFont.buttonFontSize)
+            ]))
+            okayConfiguration.buttonSize = .medium
+            okayConfiguration.cornerStyle = .capsule
+            
+            let cancelButton = UIButton(configuration: cancelConfiguration, primaryAction: .init(handler: { _ in
+                NotificationCenter.default.post(name: .init("closeKeyboard"), object: nil, userInfo: [
+                    "buttonPressed" : 0,
+                ])
+                self.dismiss(animated: true)
+            }))
+            cancelButton.tintColor = .systemRed
+            
+            buttons.append(cancelButton)
+            buttons.append(.init(configuration: okayConfiguration, primaryAction: .init(handler: { _ in
+                NotificationCenter.default.post(name: .init("closeKeyboard"), object: nil, userInfo: [
+                    "buttonPressed" : 0,
+                    "keyboardText" : textField.text ?? ""
+                ])
+                self.dismiss(animated: true)
+            })))
+        case .triple:
+            break
+        case .none:
+            break
+        @unknown default:
+            fatalError()
+        }
+        
+        let stackView = UIStackView(arrangedSubviews: buttons)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 20
+        visualEffectView.contentView.addSubview(stackView)
+        view.addConstraints([
+            stackView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: visualEffectView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: visualEffectView.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: visualEffectView.contentView.bottomAnchor, constant: -20)
+        ])
+        
+        NotificationCenter.default.addObserver(forName: .init(UIResponder.keyboardWillShowNotification), object: nil, queue: .main) { notification in
+            guard let userInfo = notification.userInfo, let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+            
+            self.bottomConstraint.constant = -frame.height
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        NotificationCenter.default.addObserver(forName: .init(UIResponder.keyboardWillHideNotification), object: nil, queue: .main) { notification in
+            self.bottomConstraint = self.bottomBackupConstraint
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if #available(iOS 17, *) {
+            registerForTraitChanges([UITraitActiveAppearance.self], action: #selector(traitDidChange))
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.2) {
+            self.view.backgroundColor = .systemBackground.withAlphaComponent(0.9)
+        }
+    }
+    
+    @objc fileprivate func traitDidChange() {
+        visualEffectView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+    }
+}
+
 
 class CytrusEmulationController : UIViewController, VirtualControllerButtonDelegate {
     fileprivate var thread: Thread!
@@ -23,6 +179,8 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
     
     fileprivate var renderView: MTKView!
     fileprivate var virtualControllerView: VirtualControllerView!
+    
+    fileprivate var portraitConstraints, landscapeConstraints: [NSLayoutConstraint]!
     
     fileprivate var game: CytrusGame
     fileprivate let cytrus = Cytrus.shared
@@ -56,20 +214,49 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
         virtualControllerView = .init(console: .n3ds, virtualButtonDelegate: self)
         view.addSubview(virtualControllerView)
         
-        view.addConstraints([
-            renderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            renderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            renderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        portraitConstraints = [
+            renderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            renderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            renderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             renderView.heightAnchor.constraint(equalTo: renderView.widthAnchor, multiplier: (3 / 5) + (3 / 4)),
             
             virtualControllerView.topAnchor.constraint(equalTo: view.topAnchor),
             virtualControllerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             virtualControllerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             virtualControllerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        ]
+        
+        landscapeConstraints = [
+            renderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            renderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            renderView.widthAnchor.constraint(equalTo: renderView.heightAnchor, multiplier: 5 / 3),
+            renderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            virtualControllerView.topAnchor.constraint(equalTo: view.topAnchor),
+            virtualControllerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            virtualControllerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            virtualControllerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        
+        let constraints: [NSLayoutConstraint] = if UIApplication.shared.statusBarOrientation == .portrait {
+            portraitConstraints
+        } else {
+            landscapeConstraints
+        }
+        view.addConstraints(constraints)
         
         NotificationCenter.default.addObserver(self, selector: #selector(controllerDidConnect),
                                                name: NSNotification.Name.GCControllerDidConnect, object: nil)
+        
+        NotificationCenter.default.addObserver(forName: .init("openKeyboard"), object: nil, queue: .main) { notification in
+            guard let config = notification.object as? KeyboardConfig else {
+                return
+            }
+            
+            let keyboardController = KeyboardController(keyboardConfig: config)
+            keyboardController.modalPresentationStyle = .overFullScreen
+            self.present(keyboardController, animated: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,10 +268,32 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
         super.viewDidLayoutSubviews()
         if !isRunning {
             isRunning = true
-            cytrus.configure(layer: renderView.layer as! CAMetalLayer)
+            cytrus.configure(layer: renderView.layer as! CAMetalLayer, with: renderView.frame.size)
             cytrus.insert(game: game.fileURL)
             thread.start()
         }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        virtualControllerView.layout()
+        if UIApplication.shared.statusBarOrientation == .portrait {
+            view.removeConstraints(landscapeConstraints)
+            view.addConstraints(portraitConstraints)
+        } else {
+            view.removeConstraints(portraitConstraints)
+            view.addConstraints(landscapeConstraints)
+        }
+        
+        coordinator.animate { _ in
+            self.view.layoutIfNeeded()
+        }
+        
+        cytrus.orientationChanged(orientation: UIApplication.shared.statusBarOrientation, for: renderView.layer as! CAMetalLayer)
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        [.portrait, .portraitUpsideDown]
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -176,6 +385,14 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
         
         extendedGamepad.rightTrigger.pressedChangedHandler = { button, value, pressed in
             pressed ? self.touchDown(.zr) : self.touchUpInside(.zr)
+        }
+        
+        extendedGamepad.leftThumbstick.valueChangedHandler = { dpad, x, y in
+            self.cytrus.thumbstickMoved(.circlePad, x: x, y: y)
+        }
+        
+        extendedGamepad.rightThumbstick.valueChangedHandler = { dpad, x, y in
+            self.cytrus.thumbstickMoved(.cStick, x: x, y: y)
         }
     }
     
