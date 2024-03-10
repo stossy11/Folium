@@ -8,6 +8,9 @@
 import Foundation
 import Grape
 import MetalKit
+#if canImport(Sudachi)
+import Sudachi
+#endif
 import UIKit
 
 enum RoundedCorners {
@@ -135,54 +138,111 @@ class LibraryController : UICollectionViewController {
             var contentConfiguration = UIListContentConfiguration.extraProminentInsetGroupedHeader()
             
             let sectionIdentifier = self.dataSource.sectionIdentifier(for: indexPath.section)
+            if let sectionIdentifier = sectionIdentifier {
+                contentConfiguration.text = sectionIdentifier.name.rawValue
+                contentConfiguration.textProperties.color = .label
+                contentConfiguration.secondaryText = sectionIdentifier.console.rawValue
+                contentConfiguration.secondaryTextProperties.color = .secondaryLabel
+                supplementaryView.contentConfiguration = contentConfiguration
+            }
             
-            contentConfiguration.text = sectionIdentifier?.name.rawValue ?? ""
-            contentConfiguration.textProperties.color = .label
-            contentConfiguration.textProperties.font = .boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title1).pointSize)
-            contentConfiguration.secondaryText = sectionIdentifier?.console.rawValue ?? ""
-            contentConfiguration.secondaryTextProperties.color = .secondaryLabel
-            contentConfiguration.secondaryTextProperties.font = .preferredFont(forTextStyle: .body)
-            supplementaryView.contentConfiguration = contentConfiguration
-
-            // TODO: this is a somewhat bad way of adding an accessory, if a supplementary view with an accessory goes too far off-screen it may appear on that section and another
-            // FIX: Adding an `else {}` to the `if {} else {}` statement with `supplementaryView.accessories = []` may work otherwise a custom UICollectionReusableView would work with `prepareForReuse`
-            if let core = sectionIdentifier, !core.missingFiles.isEmpty {
-                var configuration = UIButton.Configuration.borderless()
-                configuration.buttonSize = .large
-                let hierarchalColor: UIColor = if core.missingFiles.contains(where: { $0.fileImportance == .required }) { .systemRed } else { .systemOrange }
-                configuration.image = .init(systemName: "exclamationmark.circle.fill")?
-                    .applyingSymbolConfiguration(.init(hierarchicalColor: hierarchalColor))
+#if canImport(Sudachi)
+            func bootOSButton() -> UIButton { // MARK: Sudachi only for now
+                var bootOSButtonConfiguration = UIButton.Configuration.borderless()
+                bootOSButtonConfiguration.buttonSize = .medium
+                bootOSButtonConfiguration.image = .init(systemName: "power.circle.fill")?
+                    .applyingSymbolConfiguration(.init(hierarchicalColor: .tintColor))
                 
-                let button = UIButton(configuration: configuration, primaryAction: .init(handler: { _ in
-                    let configuration = UICollectionViewCompositionalLayoutConfiguration()
-                    configuration.interSectionSpacing = 20
-                    
-                    let missingFilesControllerCompositionalLayout = UICollectionViewCompositionalLayout(sectionProvider: { sectionIndex, layoutEnvironment in
-                        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
-                        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                        
-                        let group = NSCollectionLayoutGroup.vertical(layoutSize: itemSize, subitems: [item])
-                        group.interItemSpacing = .fixed(20)
-                        
-                        let section = NSCollectionLayoutSection(group: group)
-                        section.boundarySupplementaryItems = [
-                            .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44)),
-                                  elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                        ]
-                        section.contentInsets = .init(top: 0, leading: 20, bottom: 0, trailing: 20)
-                        section.interGroupSpacing = 20
-                        
-                        return section
-                    }, configuration: configuration)
-                    
-                    let missingFilesController = UINavigationController(rootViewController: MissingFilesController(core: core, collectionViewLayout: missingFilesControllerCompositionalLayout))
-                    missingFilesController.modalPresentationStyle = .fullScreen
-                    self.present(missingFilesController, animated: true)
+                return UIButton(configuration: bootOSButtonConfiguration, primaryAction: .init(handler: { _ in
+                    let sudachiEmulationController = SudachiEmulationController(game: nil)
+                    sudachiEmulationController.modalPresentationStyle = .fullScreen
+                    self.present(sudachiEmulationController, animated: true)
                 }))
+            }
+#endif
+            
+            func coreSettingsButton() -> UIButton {
+                var coreSettingsButtonConfiguration = UIButton.Configuration.borderless()
+                coreSettingsButtonConfiguration.buttonSize = .medium
+                coreSettingsButtonConfiguration.image = .init(systemName: "gearshape.circle.fill")?
+                    .applyingSymbolConfiguration(.init(hierarchicalColor: .tintColor))
                 
+                return UIButton(configuration: coreSettingsButtonConfiguration)
+            }
+            
+            func importGamesButton() -> UIButton {
+                var importGamesButtonConfiguration = UIButton.Configuration.borderless()
+                importGamesButtonConfiguration.buttonSize = .medium
+                importGamesButtonConfiguration.image = .init(systemName: "arrow.down.circle.fill")?
+                    .applyingSymbolConfiguration(.init(hierarchicalColor: .tintColor))
+                
+                return UIButton(configuration: importGamesButtonConfiguration)
+            }
+            
+            if let core = sectionIdentifier, !core.missingFiles.isEmpty {
+                func missingFilesButton() -> UIButton {
+                    var configuration = UIButton.Configuration.borderless()
+                    configuration.buttonSize = .large
+                    let hierarchalColor: UIColor = if core.missingFiles.contains(where: { $0.fileImportance == .required }) { .systemRed } else { .systemOrange }
+                    configuration.image = .init(systemName: "exclamationmark.circle.fill")?
+                        .applyingSymbolConfiguration(.init(hierarchicalColor: hierarchalColor))
+                    
+                    return UIButton(configuration: configuration, primaryAction: .init(handler: { _ in
+                        let configuration = UICollectionViewCompositionalLayoutConfiguration()
+                        configuration.interSectionSpacing = 20
+                        
+                        let missingFilesControllerCompositionalLayout = UICollectionViewCompositionalLayout(sectionProvider: { sectionIndex, layoutEnvironment in
+                            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
+                            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                            
+                            let group = NSCollectionLayoutGroup.vertical(layoutSize: itemSize, subitems: [item])
+                            group.interItemSpacing = .fixed(20)
+                            
+                            let section = NSCollectionLayoutSection(group: group)
+                            section.boundarySupplementaryItems = [
+                                .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44)),
+                                      elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                            ]
+                            section.contentInsets = .init(top: 0, leading: 20, bottom: 0, trailing: 20)
+                            section.interGroupSpacing = 20
+                            
+                            return section
+                        }, configuration: configuration)
+                        
+                        let missingFilesController = UINavigationController(rootViewController: MissingFilesController(core: core, collectionViewLayout: missingFilesControllerCompositionalLayout))
+                        missingFilesController.modalPresentationStyle = .fullScreen
+                        self.present(missingFilesController, animated: true)
+                    }))
+                }
+                
+                supplementaryView.accessories = if core.console == .nSwitch {
+                    [
+                        .customView(configuration: .init(customView: missingFilesButton(), placement: .trailing())),
+                        .customView(configuration: .init(customView: importGamesButton(), placement: .trailing())),
+                        .customView(configuration: .init(customView: coreSettingsButton(), placement: .trailing()))
+                    ]
+                } else {
+                    [
+                        .customView(configuration: .init(customView: missingFilesButton(), placement: .trailing())),
+                        .customView(configuration: .init(customView: importGamesButton(), placement: .trailing())),
+                        .customView(configuration: .init(customView: coreSettingsButton(), placement: .trailing()))
+                    ]
+                }
+                
+#if canImport(Sudachi)
+                supplementaryView.accessories.insert(.customView(configuration: .init(customView: bootOSButton(), placement: .trailing())), at: 1)
+#endif
+            } else {
                 supplementaryView.accessories = [
-                    .customView(configuration: .init(customView: button, placement: .trailing()))
+                    .customView(configuration: .init(customView: importGamesButton(), placement: .trailing())),
+                    .customView(configuration: .init(customView: coreSettingsButton(), placement: .trailing()))
                 ]
+                
+#if canImport(Sudachi)
+                if sectionIdentifier?.console == .nSwitch {
+                    supplementaryView.accessories.insert(.customView(configuration: .init(customView: bootOSButton(), placement: .trailing())), at: 0)
+                }
+#endif
             }
         }
         
@@ -190,14 +250,18 @@ class LibraryController : UICollectionViewController {
             switch itemIdentifier {
             case let string as String:
                 collectionView.dequeueConfiguredReusableCell(using: importGamesCellRegistration, for: indexPath, item: string)
+#if canImport(Cytrus)
             case let cytrusGame as CytrusGame:
                 collectionView.dequeueConfiguredReusableCell(using: cytrusGameCellRegistration, for: indexPath, item: cytrusGame)
+#endif
             case let grapeGame as GrapeGame:
                 collectionView.dequeueConfiguredReusableCell(using: grapeGameCellRegistration, for: indexPath, item: grapeGame)
             case let kiwiGame as KiwiGame:
                 collectionView.dequeueConfiguredReusableCell(using: kiwiGameCellRegistration, for: indexPath, item: kiwiGame)
+#if canImport(Sudachi)
             case let sudachiGame as SudachiGame:
                 collectionView.dequeueConfiguredReusableCell(using: sudachiGameCellRegistration, for: indexPath, item: sudachiGame)
+#endif
             default:
                 nil
             }
@@ -210,22 +274,23 @@ class LibraryController : UICollectionViewController {
         snapshot = .init()
         snapshot.appendSections(cores.sorted())
         cores.forEach { core in
-            if core.games.isEmpty {
-                snapshot.appendItems(["Import Games"], toSection: core)
-            } else {
-                if !core.missingFiles.contains(where: { $0.fileImportance == .required }) {
-                    switch core.games {
-                    case let cytrusGames as [CytrusGame]:
-                        snapshot.appendItems(cytrusGames.sorted(), toSection: core)
-                    case let grapeGames as [GrapeGame]:
-                        snapshot.appendItems(grapeGames.sorted(), toSection: core)
-                    case let kiwiGames as [KiwiGame]:
-                        snapshot.appendItems(kiwiGames.sorted(), toSection: core)
-                    case let sudachiGames as [SudachiGame]:
-                        snapshot.appendItems(sudachiGames.sorted(), toSection: core)
-                    default:
-                        break
-                    }
+            if !core.missingFiles.contains(where: { $0.fileImportance == .required }), !core.games.isEmpty {
+                switch core.games {
+#if canImport(Cytrus)
+                case let cytrusGames as [CytrusGame]:
+                    snapshot.appendItems(cytrusGames.sorted(), toSection: core)
+#endif
+                case let grapeGames as [GrapeGame]:
+                    snapshot.appendItems(grapeGames.sorted(), toSection: core)
+                case let kiwiGames as [KiwiGame]:
+                    snapshot.appendItems(kiwiGames.sorted(), toSection: core)
+#if canImport(Sudachi)
+                case let sudachiGames as [SudachiGame]:
+                    Sudachi.shared.insert(games: sudachiGames.reduce(into: [URL](), { $0.append($1.fileURL) }))
+                    snapshot.appendItems(sudachiGames.sorted(), toSection: core)
+#endif
+                default:
+                    break
                 }
             }
         }

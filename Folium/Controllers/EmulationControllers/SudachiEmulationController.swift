@@ -22,9 +22,9 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
     
     fileprivate var portraitConstraints, landscapeConstraints: [NSLayoutConstraint]!
     
-    fileprivate var game: SudachiGame
+    fileprivate var game: SudachiGame? = nil
     fileprivate let sudachi = Sudachi.shared
-    init(game: SudachiGame) {
+    init(game: SudachiGame? = nil) {
         self.game = game
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,8 +98,12 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
         super.viewDidLayoutSubviews()
         if !isRunning {
             isRunning = true
-            sudachi.configure(layer: renderView.layer as! CAMetalLayer)
-            sudachi.insert(game: game.fileURL)
+            sudachi.configure(layer: renderView.layer as! CAMetalLayer, with: renderView.frame.size)
+            if let game = game {
+                sudachi.insert(game: game.fileURL)
+            } else {
+                sudachi.bootOS()
+            }
             thread.start()
         }
     }
@@ -214,6 +218,14 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
         
         extendedGamepad.rightTrigger.pressedChangedHandler = { button, value, pressed in
             pressed ? self.touchDown(.zr) : self.touchUpInside(.zr)
+        }
+        
+        extendedGamepad.leftThumbstick.valueChangedHandler = { dpad, x, y in
+            self.sudachi.thumbstickMoved(.SL, x: x, y: y)
+        }
+        
+        extendedGamepad.rightThumbstick.valueChangedHandler = { dpad, x, y in
+            self.sudachi.thumbstickMoved(.SR, x: x, y: y)
         }
     }
     
