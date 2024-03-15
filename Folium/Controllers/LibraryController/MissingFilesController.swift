@@ -40,7 +40,6 @@ class MissingFilesController : UICollectionViewController {
             
             contentConfiguration.text = self.dataSource.sectionIdentifier(for: indexPath.section) ?? ""
             contentConfiguration.textProperties.color = .label
-            contentConfiguration.textProperties.font = .boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .title1).pointSize)
             supplementaryView.contentConfiguration = contentConfiguration
         }
         

@@ -47,7 +47,7 @@ class KeyboardController : UIViewController, UITextFieldDelegate {
         visualEffectView.translatesAutoresizingMaskIntoConstraints = false
         visualEffectView.clipsToBounds = true
         visualEffectView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        visualEffectView.layer.borderWidth = 2
+        visualEffectView.layer.borderWidth = 3
         visualEffectView.layer.cornerCurve = .continuous
         visualEffectView.layer.cornerRadius = 35
         view.addSubview(visualEffectView)
@@ -205,7 +205,7 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
         renderView = .init(frame: .zero, device: MTLCreateSystemDefaultDevice())
         renderView.translatesAutoresizingMaskIntoConstraints = false
         renderView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        renderView.layer.borderWidth = 2
+        renderView.layer.borderWidth = 3
         renderView.clipsToBounds = true
         renderView.layer.cornerCurve = .continuous
         renderView.layer.cornerRadius = 8
@@ -256,6 +256,10 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
             let keyboardController = KeyboardController(keyboardConfig: config)
             keyboardController.modalPresentationStyle = .overFullScreen
             self.present(keyboardController, animated: true)
+        }
+        
+        if #available(iOS 17, *) {
+            registerForTraitChanges([UITraitActiveAppearance.self], action: #selector(traitDidChange))
         }
     }
     
@@ -323,6 +327,10 @@ class CytrusEmulationController : UIViewController, VirtualControllerButtonDeleg
         while true {
             cytrus.step()
         }
+    }
+    
+    @objc fileprivate func traitDidChange() {
+        renderView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
     }
     
     // MARK: Notifications

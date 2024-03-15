@@ -74,6 +74,7 @@ struct Core : Comparable, Hashable {
     let name: Name
     var games: [AnyHashable]
     var missingFiles: [MissingFile]
+    let root: URL
     
     static func < (lhs: Core, rhs: Core) -> Bool {
         lhs.name.rawValue < rhs.name.rawValue
@@ -293,22 +294,24 @@ class LibraryManager {
             }
         }
         
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
 #if canImport(Cytrus)
-        var cytrusCore = Core(console: .n3ds, name: .cytrus, games: [], missingFiles: [])
+        var cytrusCore = Core(console: .n3ds, name: .cytrus, games: [], missingFiles: [], root: directory.appendingPathComponent(Core.Name.cytrus.rawValue, conformingTo: .folder))
         games(from: try romsDirectoryCrawler(for: .cytrus), for: &cytrusCore)
         DirectoriesManager.shared.scanDirectoriesForRequiredFiles(for: &cytrusCore)
 #endif
         
-        var grapeCore = Core(console: .nds, name: .grape, games: [], missingFiles: [])
+        var grapeCore = Core(console: .nds, name: .grape, games: [], missingFiles: [], root: directory.appendingPathComponent(Core.Name.grape.rawValue, conformingTo: .folder))
         games(from: try romsDirectoryCrawler(for: .grape), for: &grapeCore)
         DirectoriesManager.shared.scanDirectoriesForRequiredFiles(for: &grapeCore)
         
-        var kiwiCore = Core(console: .nes, name: .kiwi, games: [], missingFiles: [])
+        var kiwiCore = Core(console: .nes, name: .kiwi, games: [], missingFiles: [], root: directory.appendingPathComponent(Core.Name.kiwi.rawValue, conformingTo: .folder))
         games(from: try romsDirectoryCrawler(for: .kiwi), for: &kiwiCore)
         DirectoriesManager.shared.scanDirectoriesForRequiredFiles(for: &kiwiCore)
         
 #if canImport(Sudachi)
-        var sudachiCore = Core(console: .nSwitch, name: .sudachi, games: [], missingFiles: [])
+        var sudachiCore = Core(console: .nSwitch, name: .sudachi, games: [], missingFiles: [], root: directory.appendingPathComponent(Core.Name.sudachi.rawValue, conformingTo: .folder))
         games(from: try romsDirectoryCrawler(for: .sudachi), for: &sudachiCore)
         DirectoriesManager.shared.scanDirectoriesForRequiredFiles(for: &sudachiCore)
 #endif

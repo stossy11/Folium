@@ -45,10 +45,13 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
         renderView = .init(frame: .zero, device: MTLCreateSystemDefaultDevice())
         renderView.translatesAutoresizingMaskIntoConstraints = false
         renderView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        renderView.layer.borderWidth = 2
+        renderView.layer.borderWidth = 3
         renderView.clipsToBounds = true
         renderView.layer.cornerCurve = .continuous
         renderView.layer.cornerRadius = 8
+        if #available(iOS 16.4, *) {
+            
+        }
         view.addSubview(renderView)
         
         virtualControllerView = .init(console: .nSwitch, virtualButtonDelegate: self)
@@ -87,6 +90,10 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
         
         NotificationCenter.default.addObserver(self, selector: #selector(controllerDidConnect),
                                                name: NSNotification.Name.GCControllerDidConnect, object: nil)
+        
+        if #available(iOS 17, *) {
+            registerForTraitChanges([UITraitActiveAppearance.self], action: #selector(traitDidChange))
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,6 +113,8 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
             }
             thread.start()
         }
+        
+        sudachi.orientationChanged(orientation: UIApplication.shared.statusBarOrientation, with: renderView.layer as! CAMetalLayer, size: renderView.frame.size)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
@@ -156,6 +165,10 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
     
     @objc fileprivate func step() {
         sudachi.step()
+    }
+    
+    @objc fileprivate func traitDidChange() {
+        renderView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
     }
     
     // MARK: Notifications
@@ -221,11 +234,11 @@ class SudachiEmulationController : UIViewController, VirtualControllerButtonDele
         }
         
         extendedGamepad.leftThumbstick.valueChangedHandler = { dpad, x, y in
-            self.sudachi.thumbstickMoved(.SL, x: x, y: y)
+            self.sudachi.thumbstickMoved(.left, x: x, y: y)
         }
         
         extendedGamepad.rightThumbstick.valueChangedHandler = { dpad, x, y in
-            self.sudachi.thumbstickMoved(.SR, x: x, y: y)
+            self.sudachi.thumbstickMoved(.right, x: x, y: y)
         }
     }
     

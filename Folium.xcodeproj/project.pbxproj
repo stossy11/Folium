@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E60427652BA164FD00120AD9 /* EmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60427642BA164FD00120AD9 /* EmulationController.swift */; };
 		E65DFCBB2B95A78300BDB6B2 /* libSoundTouch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */; };
 		E65DFCBF2B95ABF500BDB6B2 /* libteakra.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */; };
 		E670A9F72B8728E90006CBCD /* BlurredTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670A9F62B8728E90006CBCD /* BlurredTextButton.swift */; };
 		E670A9F92B8729200006CBCD /* BlurredImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670A9F82B8729200006CBCD /* BlurredImageButton.swift */; };
 		E673F3282B906044002F2B7D /* CytrusGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E673F3272B906044002F2B7D /* CytrusGame.swift */; };
-		E674A0AC2B90841D0052A49C /* libMoltenVK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */; };
-		E674A0AD2B90841D0052A49C /* libMoltenVK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E690393F2B9D5C6E00F6D78D /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = E690393E2B9D5C6E00F6D78D /* SwiftSyntax */; };
 		E69039412B9D5C6E00F6D78D /* SwiftSyntaxMacros in Frameworks */ = {isa = PBXBuildFile; productRef = E69039402B9D5C6E00F6D78D /* SwiftSyntaxMacros */; };
 		E69647E52B90831F008F4759 /* CytrusEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69647E42B90831F008F4759 /* CytrusEmulationController.swift */; };
 		E69C45272B95E9DF00EF49B7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2DB2B95A2B700DF6F2A /* CoreBluetooth.framework */; };
 		E69C452B2B95F31E00EF49B7 /* ImportGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */; };
 		E69C45342B95F5C400EF49B7 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = E69C452F2B95F5C400EF49B7 /* fishhook.c */; };
-		E69C45352B95F5C400EF49B7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E69C45312B95F5C400EF49B7 /* LICENSE */; };
 		E69C45362B95F5C400EF49B7 /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E69C45332B95F5C400EF49B7 /* utils.m */; };
 		E69C45382B95F61A00EF49B7 /* JITEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = E69C45372B95F61A00EF49B7 /* JITEnabler.m */; };
+		E6A23ED02BA1685700D1DD77 /* MoltenVK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A23ECE2BA1682C00D1DD77 /* MoltenVK.xcframework */; };
+		E6A23ED12BA1685700D1DD77 /* MoltenVK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6A23ECE2BA1682C00D1DD77 /* MoltenVK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6A23EE72BA1902F00D1DD77 /* INIEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23EE62BA1902F00D1DD77 /* INIEditController.swift */; };
 		E6ABB2A32B95999700DF6F2A /* SudachiGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ABB2A22B95999700DF6F2A /* SudachiGame.swift */; };
 		E6ABB2BC2B959F8100DF6F2A /* libOpenAL.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2BB2B959F8100DF6F2A /* libOpenAL.xcframework */; };
 		E6ABB2C02B95A05C00DF6F2A /* libdynarmic.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2BD2B95A05C00DF6F2A /* libdynarmic.xcframework */; };
@@ -105,9 +106,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E6A23ED12BA1685700D1DD77 /* MoltenVK.xcframework in Embed Frameworks */,
 				E6AEBA3C2B95B998005E8433 /* libavfilter.xcframework in Embed Frameworks */,
 				E6AEBA3E2B95B998005E8433 /* libavformat.xcframework in Embed Frameworks */,
-				E674A0AD2B90841D0052A49C /* libMoltenVK.xcframework in Embed Frameworks */,
 				E6AEBA3A2B95B998005E8433 /* libavcodec.xcframework in Embed Frameworks */,
 				E6AEBA422B95B998005E8433 /* libswresample.xcframework in Embed Frameworks */,
 				E6AEBA442B95B998005E8433 /* libswscale.xcframework in Embed Frameworks */,
@@ -119,6 +120,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E60427642BA164FD00120AD9 /* EmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmulationController.swift; sourceTree = "<group>"; };
 		E635836B2B95822D00D35422 /* Sudachi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sudachi.xcodeproj; path = Sudachi/Sudachi.xcodeproj; sourceTree = "<group>"; };
 		E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libSoundTouch.xcframework; sourceTree = "<group>"; };
 		E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libteakra.xcframework; sourceTree = "<group>"; };
@@ -126,7 +128,6 @@
 		E670A9F82B8729200006CBCD /* BlurredImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImageButton.swift; sourceTree = "<group>"; };
 		E673F3272B906044002F2B7D /* CytrusGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CytrusGame.swift; sourceTree = "<group>"; };
 		E673FDDA2B907117002F2B7D /* Cytrus.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cytrus.xcodeproj; path = Cytrus/Cytrus.xcodeproj; sourceTree = "<group>"; };
-		E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libMoltenVK.xcframework; sourceTree = "<group>"; };
 		E69647D72B908166008F4759 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		E69647E42B90831F008F4759 /* CytrusEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CytrusEmulationController.swift; sourceTree = "<group>"; };
 		E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportGamesCell.swift; sourceTree = "<group>"; };
@@ -137,6 +138,8 @@
 		E69C45312B95F5C400EF49B7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E69C45332B95F5C400EF49B7 /* utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
 		E69C45372B95F61A00EF49B7 /* JITEnabler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JITEnabler.m; sourceTree = "<group>"; };
+		E6A23ECE2BA1682C00D1DD77 /* MoltenVK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = MoltenVK.xcframework; sourceTree = "<group>"; };
+		E6A23EE62BA1902F00D1DD77 /* INIEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INIEditController.swift; sourceTree = "<group>"; };
 		E6ABB2A22B95999700DF6F2A /* SudachiGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudachiGame.swift; sourceTree = "<group>"; };
 		E6ABB2BB2B959F8100DF6F2A /* libOpenAL.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libOpenAL.xcframework; sourceTree = "<group>"; };
 		E6ABB2BD2B95A05C00DF6F2A /* libdynarmic.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libdynarmic.xcframework; sourceTree = "<group>"; };
@@ -213,10 +216,10 @@
 				E6AEBA3D2B95B998005E8433 /* libavformat.xcframework in Frameworks */,
 				E6AEBA182B95B64F005E8433 /* boost_iostreams.xcframework in Frameworks */,
 				E6F8D7072B8F0BAB00D2E15B /* Grape in Frameworks */,
+				E6A23ED02BA1685700D1DD77 /* MoltenVK.xcframework in Frameworks */,
 				E6AEBA1A2B95B64F005E8433 /* boost_serialization.xcframework in Frameworks */,
 				E69C45272B95E9DF00EF49B7 /* CoreBluetooth.framework in Frameworks */,
 				E6D6ED0B2B85E93800089AF2 /* Kiwi in Frameworks */,
-				E674A0AC2B90841D0052A49C /* libMoltenVK.xcframework in Frameworks */,
 				E6AEBA1F2B95B699005E8433 /* libMachineIndependent.xcframework in Frameworks */,
 				E6AEBA432B95B998005E8433 /* libswscale.xcframework in Frameworks */,
 				E6AEBA392B95B998005E8433 /* libavcodec.xcframework in Frameworks */,
@@ -274,6 +277,7 @@
 		E674A0A92B9083F10052A49C /* XCFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E6A23ECE2BA1682C00D1DD77 /* MoltenVK.xcframework */,
 				E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */,
 				E6AEBA2D2B95B98C005E8433 /* libavfilter.xcframework */,
 				E6AEBA302B95B98C005E8433 /* libavformat.xcframework */,
@@ -302,7 +306,6 @@
 				E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */,
 				E6ABB2DD2B95A32A00DF6F2A /* libSPIRV.xcframework */,
 				E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */,
-				E674A0AA2B9083FC0052A49C /* libMoltenVK.xcframework */,
 			);
 			path = XCFrameworks;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 			children = (
 				E6D6ED062B85E88E00089AF2 /* EmulationControllers */,
 				E6D6ECEE2B85E71800089AF2 /* LibraryController */,
+				E6A23EE62BA1902F00D1DD77 /* INIEditController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -444,6 +448,7 @@
 				E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */,
 				E6D6ED072B85E89C00089AF2 /* KiwiEmulationController.swift */,
 				E6F3846C2B9AB2AD00A570F9 /* SudachiEmulationController.swift */,
+				E60427642BA164FD00120AD9 /* EmulationController.swift */,
 			);
 			path = EmulationControllers;
 			sourceTree = "<group>";
@@ -559,7 +564,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E69C45352B95F5C400EF49B7 /* LICENSE in Resources */,
 				E6D6ECE12B85E0BE00089AF2 /* Assets.xcassets in Resources */,
 				E6D6ECE42B85E0BE00089AF2 /* Base in Resources */,
 			);
@@ -582,6 +586,7 @@
 				E6D6ECD82B85E0BC00089AF2 /* AppDelegate.swift in Sources */,
 				E6D6ED002B85E71800089AF2 /* LibraryManager.swift in Sources */,
 				E6F384832B9B049300A570F9 /* MissingFilesController.swift in Sources */,
+				E60427652BA164FD00120AD9 /* EmulationController.swift in Sources */,
 				E6D6ECFC2B85E71800089AF2 /* LibraryController.swift in Sources */,
 				E6D6ECDA2B85E0BC00089AF2 /* SceneDelegate.swift in Sources */,
 				E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */,
@@ -589,6 +594,7 @@
 				E6D6ED042B85E71800089AF2 /* VirtualControllerView.swift in Sources */,
 				E69C45362B95F5C400EF49B7 /* utils.m in Sources */,
 				E69647E52B90831F008F4759 /* CytrusEmulationController.swift in Sources */,
+				E6A23EE72BA1902F00D1DD77 /* INIEditController.swift in Sources */,
 				E673F3282B906044002F2B7D /* CytrusGame.swift in Sources */,
 				E6D6ED082B85E89C00089AF2 /* KiwiEmulationController.swift in Sources */,
 				E6D6ECFF2B85E71800089AF2 /* MissingFileCell.swift in Sources */,
@@ -753,7 +759,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -772,6 +778,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
 				MARKETING_VERSION = 1.0;
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
@@ -799,7 +809,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -815,6 +825,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
 				MARKETING_VERSION = 1.0;
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";

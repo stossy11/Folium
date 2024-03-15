@@ -1,5 +1,5 @@
 {
-  "originHash" : "476c840f724854dece1298ecbe6341bafd7e71878057e5ab8fc691b8a8e0a5d5",
+  "originHash" : "50b4fcb2ce4547d41ba70fae9974d44b3df2c288eb0fd0c6ff7fb3d16e266f0e",
   "pins" : [
     {
       "identity" : "lz4-spm",
@@ -43,7 +43,7 @@
       "location" : "https://github.com/facebook/zstd",
       "state" : {
         "branch" : "dev",
-        "revision" : "372fddf4e6a6db6776b745f31c02a7c8c8dfc83f"
+        "revision" : "4bd911ae41a62cfbaf624bfeb5a3952d37019575"
       }
     }
   ],
