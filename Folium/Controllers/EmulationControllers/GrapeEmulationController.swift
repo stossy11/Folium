@@ -11,192 +11,23 @@ import Grape
 import SDL2
 import UIKit
 
-class GrapeEmulationController : UIViewController, VirtualControllerButtonDelegate {
+class GrapeEmulationController : EmulationScreensController {
     fileprivate var displayLink: CADisplayLink!
-    fileprivate var isRunning = false
+    fileprivate var isRunning: Bool = false
     
-    fileprivate var topImageView, bottomImageView, topBlurredImageView, bottomBlurredImageView: UIImageView!
-    fileprivate var visualEffectView: UIVisualEffectView!
-    fileprivate var virtualControllerView: VirtualControllerView!
+    fileprivate var device: SDL_AudioDeviceID!
     
-    fileprivate var portraitConstraints, landscapeConstraints: [NSLayoutConstraint]!
-    
-    var device: SDL_AudioDeviceID!
-    
-    fileprivate var game: GrapeGame
     fileprivate let grape = Grape.shared
-    init(game: GrapeGame) {
-        self.game = game
-        super.init(nibName: nil, bundle: nil)
+    override init(game: AnyHashable) {
+        super.init(game: game)
+        guard let game = game as? GrapeGame else {
+            return
+        }
+        
         grape.insert(game: game.fileURL)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         
         displayLink = .init(target: self, selector: #selector(step))
         displayLink.preferredFrameRateRange = .init(minimum: 30, maximum: 60, preferred: 60)
-        
-        topBlurredImageView = .init()
-        topBlurredImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(topBlurredImageView)
-        
-        if !game.isGBA {
-            bottomBlurredImageView = .init()
-            bottomBlurredImageView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(bottomBlurredImageView)
-        }
-        
-        visualEffectView = .init(effect: UIBlurEffect(style: .systemChromeMaterial))
-        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(visualEffectView)
-        
-        topImageView = .init()
-        topImageView.translatesAutoresizingMaskIntoConstraints = false
-        topImageView.clipsToBounds = true
-        topImageView.layer.cornerCurve = .continuous
-        topImageView.layer.cornerRadius = 8
-        view.addSubview(topImageView)
-        
-        if !game.isGBA {
-            bottomImageView = .init()
-            bottomImageView.translatesAutoresizingMaskIntoConstraints = false
-            bottomImageView.clipsToBounds = true
-            bottomImageView.isUserInteractionEnabled = true
-            bottomImageView.layer.cornerCurve = .continuous
-            bottomImageView.layer.cornerRadius = 8
-            view.addSubview(bottomImageView)
-        }
-
-        virtualControllerView = .init(console: .nds, virtualButtonDelegate: self)
-        view.addSubview(virtualControllerView)
-        
-        portraitConstraints = if game.isGBA {
-            [
-                topBlurredImageView.topAnchor.constraint(equalTo: view.topAnchor),
-                topBlurredImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                topBlurredImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                visualEffectView.topAnchor.constraint(equalTo: view.topAnchor),
-                visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                topImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-                topImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-                topImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-                topImageView.heightAnchor.constraint(equalTo: topImageView.widthAnchor, multiplier: 3 / 4),
-                
-                virtualControllerView.topAnchor.constraint(equalTo: view.topAnchor),
-                virtualControllerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                virtualControllerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                virtualControllerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                topBlurredImageView.bottomAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 10)
-            ]
-        } else {
-            [
-                topBlurredImageView.topAnchor.constraint(equalTo: view.topAnchor),
-                topBlurredImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                topBlurredImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                visualEffectView.topAnchor.constraint(equalTo: view.topAnchor),
-                visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                topImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-                topImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-                topImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-                topImageView.heightAnchor.constraint(equalTo: topImageView.widthAnchor, multiplier: 3 / 4),
-                
-                bottomBlurredImageView.topAnchor.constraint(equalTo: topBlurredImageView.bottomAnchor),
-                bottomBlurredImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                bottomBlurredImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 20),
-                bottomImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-                bottomImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-                bottomImageView.heightAnchor.constraint(equalTo: bottomImageView.widthAnchor, multiplier: 3 / 4),
-                
-                virtualControllerView.topAnchor.constraint(equalTo: view.topAnchor),
-                virtualControllerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                virtualControllerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                virtualControllerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                topBlurredImageView.bottomAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 10),
-                bottomBlurredImageView.bottomAnchor.constraint(equalTo: bottomImageView.bottomAnchor, constant: 20)
-            ]
-        }
-        
-        landscapeConstraints = if game.isGBA {
-            [
-                topBlurredImageView.topAnchor.constraint(equalTo: view.topAnchor),
-                topBlurredImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                topBlurredImageView.widthAnchor.constraint(equalTo: topBlurredImageView.heightAnchor, multiplier: 4 / 3),
-                topBlurredImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                
-                visualEffectView.topAnchor.constraint(equalTo: view.topAnchor),
-                visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                topImageView.topAnchor.constraint(equalTo: topBlurredImageView.topAnchor, constant: 20),
-                topImageView.leadingAnchor.constraint(equalTo: topBlurredImageView.leadingAnchor, constant: 20),
-                topImageView.bottomAnchor.constraint(equalTo: topBlurredImageView.bottomAnchor, constant: -20),
-                topImageView.trailingAnchor.constraint(equalTo: topBlurredImageView.trailingAnchor, constant: -20),
-                
-                virtualControllerView.topAnchor.constraint(equalTo: view.topAnchor),
-                virtualControllerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                virtualControllerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                virtualControllerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ]
-        } else {
-            [
-                topBlurredImageView.topAnchor.constraint(equalTo: view.topAnchor),
-                topBlurredImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2 / 4),
-                topBlurredImageView.widthAnchor.constraint(equalTo: topBlurredImageView.heightAnchor, multiplier: 4 / 3),
-                topBlurredImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                
-                visualEffectView.topAnchor.constraint(equalTo: view.topAnchor),
-                visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                
-                topImageView.topAnchor.constraint(equalTo: topBlurredImageView.topAnchor, constant: 20),
-                topImageView.leadingAnchor.constraint(equalTo: topBlurredImageView.leadingAnchor, constant: 20),
-                topImageView.bottomAnchor.constraint(equalTo: topBlurredImageView.bottomAnchor, constant: -10),
-                topImageView.trailingAnchor.constraint(equalTo: topBlurredImageView.trailingAnchor, constant: -20),
-                
-                bottomBlurredImageView.topAnchor.constraint(equalTo: topBlurredImageView.bottomAnchor),
-                bottomBlurredImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                bottomBlurredImageView.widthAnchor.constraint(equalTo: bottomBlurredImageView.heightAnchor, multiplier: 4 / 3),
-                bottomBlurredImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                
-                bottomImageView.topAnchor.constraint(equalTo: bottomBlurredImageView.topAnchor, constant: 10),
-                bottomImageView.leadingAnchor.constraint(equalTo: bottomBlurredImageView.leadingAnchor, constant: 20),
-                bottomImageView.bottomAnchor.constraint(equalTo: bottomBlurredImageView.bottomAnchor, constant: -20),
-                bottomImageView.trailingAnchor.constraint(equalTo: bottomBlurredImageView.trailingAnchor, constant: -20),
-                
-                virtualControllerView.topAnchor.constraint(equalTo: view.topAnchor),
-                virtualControllerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                virtualControllerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                virtualControllerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ]
-        }
-        
-        let constraints: [NSLayoutConstraint] = if UIApplication.shared.statusBarOrientation == .portrait {
-            portraitConstraints
-        } else {
-            landscapeConstraints
-        }
-        view.addConstraints(constraints)
-        
         
         SDL_SetMainReady()
         SDL_InitSubSystem(SDL_INIT_AUDIO)
@@ -223,14 +54,10 @@ class GrapeEmulationController : UIViewController, VirtualControllerButtonDelega
         
         device = SDL_OpenAudioDevice(nil, 0, &spec, nil, 0)
         SDL_PauseAudioDevice(device, 0)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(controllerDidConnect),
-                                               name: NSNotification.Name.GCControllerDidConnect, object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLayoutSubviews() {
@@ -238,48 +65,71 @@ class GrapeEmulationController : UIViewController, VirtualControllerButtonDelega
         if !isRunning {
             isRunning = true
             
-            if !game.isGBA {
-                grape.updateScreenLayout(with: bottomImageView.frame.size)
+            guard let game = game as? GrapeGame else {
+                return
             }
+            
+            if !game.isGBA {
+                grape.updateScreenLayout(with: secondaryScreen.frame.size)
+            }
+            
             displayLink.add(to: .current, forMode: .common)
         }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        virtualControllerView.layout()
-        if UIApplication.shared.statusBarOrientation == .portrait {
-            view.removeConstraints(landscapeConstraints)
-            view.addConstraints(portraitConstraints)
-        } else {
-            view.removeConstraints(portraitConstraints)
-            view.addConstraints(landscapeConstraints)
+        guard let game = game as? GrapeGame else {
+            return
         }
         
         coordinator.animate { _ in
-            self.view.layoutIfNeeded()
-            
-            if !self.game.isGBA {
-                self.grape.updateScreenLayout(with: self.bottomImageView.frame.size)
+            if !game.isGBA {
+                self.grape.updateScreenLayout(with: self.secondaryScreen.frame.size)
             }
         }
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .pad && !game.isGBA { .landscape } else { .all }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        guard let touch = touches.first, touch.view == bottomImageView, !game.isGBA else {
+    @objc fileprivate func step() {
+        guard let game = game as? GrapeGame, let primaryScreen = primaryScreen as? UIImageView,
+        let secondaryScreen = secondaryScreen as? UIImageView else {
             return
         }
         
-        grape.touchBegan(at: touch.location(in: bottomImageView))
+        grape.step()
+        
+        let screenFramebuffer = grape.screenFramebuffer(isGBA: game.isGBA)
+        guard let topCGImage = cgImage(from: screenFramebuffer, width: game.isGBA ? 240 : 256, height: game.isGBA ? 160 : 192) else {
+            return
+        }
+        
+        primaryScreen.image = .init(cgImage: topCGImage)
+        
+        if !game.isGBA {
+            guard let bottomCGImage = cgImage(from: screenFramebuffer.advanced(by: 256 * 192), width: 256, height: 192) else {
+                return
+            }
+            
+            secondaryScreen.image = .init(cgImage: bottomCGImage)
+        }
+    }
+    
+    // MARK: Touch Delegates
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard let game = game as? GrapeGame, let touch = touches.first, touch.view == secondaryScreen, !game.isGBA else {
+            return
+        }
+        
+        grape.touchBegan(at: touch.location(in: secondaryScreen))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+        guard let game = game as? GrapeGame else {
+            return
+        }
+        
         if !game.isGBA {
             grape.touchEnded()
         }
@@ -287,62 +137,16 @@ class GrapeEmulationController : UIViewController, VirtualControllerButtonDelega
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        guard let touch = touches.first, touch.view == bottomImageView, !game.isGBA else {
+        guard let game = game as? GrapeGame, let touch = touches.first, touch.view == secondaryScreen, !game.isGBA else {
             return
         }
         
-        grape.touchMoved(at: touch.location(in: bottomImageView))
+        grape.touchMoved(at: touch.location(in: secondaryScreen))
     }
     
-    @objc fileprivate func step() {
-        grape.step()
-        
-        let screenFramebuffer = grape.screenFramebuffer(isGBA: game.isGBA)
-        
-        
-        guard let topCGImage = cgImage(from: screenFramebuffer, width: game.isGBA ? 240 : 256, height: game.isGBA ? 160 : 192) else {
-            return
-        }
-        
-        topBlurredImageView.image = .init(cgImage: topCGImage)
-        topImageView.image = .init(cgImage: topCGImage)
-        
-        if !game.isGBA {
-            guard let bottomCGImage = cgImage(from: screenFramebuffer.advanced(by: 256 * 192), width: 256, height: 192) else {
-                return
-            }
-            
-            bottomBlurredImageView.image = .init(cgImage: bottomCGImage)
-            bottomImageView.image = .init(cgImage: bottomCGImage)
-        }
-    }
-    
-    fileprivate func cgImage(from screenFramebuffer: UnsafeMutablePointer<UInt32>, width: Int, height: Int) -> CGImage? {
-        var imageRef: CGImage?
-        
-        let colorSpaceRef = CGColorSpaceCreateDeviceRGB()
-        
-        let bitsPerComponent = 8
-        let bytesPerPixel = 4
-        let bitsPerPixel = bytesPerPixel * bitsPerComponent
-        let bytesPerRow = bytesPerPixel * width
-        let totalBytes = height * bytesPerRow
-        
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue).union(.byteOrderDefault)
-        guard let providerRef = CGDataProvider(dataInfo: nil, data: screenFramebuffer, size: totalBytes,
-                                               releaseData: {_,_,_  in}) else {
-            return nil
-        }
-        
-        imageRef = CGImage(width: width, height: height, bitsPerComponent: bitsPerComponent, bitsPerPixel: bitsPerPixel,
-                           bytesPerRow: bytesPerRow, space: colorSpaceRef, bitmapInfo: bitmapInfo, provider: providerRef,
-                           decode: nil, shouldInterpolate: false, intent: .defaultIntent)
-        
-        return imageRef
-    }
-    
-    // MARK: Notifications
-    @objc fileprivate func controllerDidConnect(_ notification: Notification) {
+    // MARK: Physical Controller Delegates
+    override func controllerDidConnect(_ notification: Notification) {
+        super.controllerDidConnect(notification)
         guard let controller = notification.object as? GCController, let extendedGamepad = controller.extendedGamepad else {
             return
         }
@@ -396,8 +200,9 @@ class GrapeEmulationController : UIViewController, VirtualControllerButtonDelega
         }
     }
     
-    // MARK: Delegate
-    func touchDown(_ buttonType: VirtualControllerButton.ButtonType) {
+    // MARK: Virtual Controller Delegates
+    override func touchDown(_ buttonType: VirtualControllerButton.ButtonType) {
+        super.touchDown(buttonType)
         switch buttonType {
         case .dpadUp:
             grape.virtualControllerButtonDown(6)
@@ -428,7 +233,8 @@ class GrapeEmulationController : UIViewController, VirtualControllerButtonDelega
         }
     }
     
-    func touchUpInside(_ buttonType: VirtualControllerButton.ButtonType) {
+    override func touchUpInside(_ buttonType: VirtualControllerButton.ButtonType) {
+        super.touchUpInside(buttonType)
         switch buttonType {
         case .dpadUp:
             grape.virtualControllerButtonUp(6)

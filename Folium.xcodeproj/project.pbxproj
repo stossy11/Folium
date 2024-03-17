@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E60427652BA164FD00120AD9 /* EmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60427642BA164FD00120AD9 /* EmulationController.swift */; };
+		E60427652BA164FD00120AD9 /* EmulationVirtualControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60427642BA164FD00120AD9 /* EmulationVirtualControllerController.swift */; };
 		E65DFCBB2B95A78300BDB6B2 /* libSoundTouch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */; };
 		E65DFCBF2B95ABF500BDB6B2 /* libteakra.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */; };
 		E670A9F72B8728E90006CBCD /* BlurredTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E670A9F62B8728E90006CBCD /* BlurredTextButton.swift */; };
@@ -60,6 +60,7 @@
 		E6AEBA432B95B998005E8433 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA312B95B98C005E8433 /* libswscale.xcframework */; };
 		E6AEBA442B95B998005E8433 /* libswscale.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA312B95B98C005E8433 /* libswscale.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6AEBA462B95BA43005E8433 /* boost_context.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA452B95BA43005E8433 /* boost_context.xcframework */; };
+		E6AF9F802BA6B8CE002824A7 /* EmulationScreensController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AF9F7F2BA6B8CE002824A7 /* EmulationScreensController.swift */; };
 		E6C651AC2B8C5D4500EB0F71 /* GrapeEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */; };
 		E6C651B12B8C5E8700EB0F71 /* GrapeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */; };
 		E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651B22B8C5E9C00EB0F71 /* KiwiGame.swift */; };
@@ -120,7 +121,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E60427642BA164FD00120AD9 /* EmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmulationController.swift; sourceTree = "<group>"; };
+		E60427642BA164FD00120AD9 /* EmulationVirtualControllerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmulationVirtualControllerController.swift; sourceTree = "<group>"; };
 		E635836B2B95822D00D35422 /* Sudachi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sudachi.xcodeproj; path = Sudachi/Sudachi.xcodeproj; sourceTree = "<group>"; };
 		E65DFCBA2B95A78300BDB6B2 /* libSoundTouch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libSoundTouch.xcframework; sourceTree = "<group>"; };
 		E65DFCBE2B95ABF500BDB6B2 /* libteakra.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libteakra.xcframework; sourceTree = "<group>"; };
@@ -168,6 +169,7 @@
 		E6AEBA312B95B98C005E8433 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswscale.xcframework; sourceTree = "<group>"; };
 		E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavcodec.xcframework; sourceTree = "<group>"; };
 		E6AEBA452B95BA43005E8433 /* boost_context.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = boost_context.xcframework; sourceTree = "<group>"; };
+		E6AF9F7F2BA6B8CE002824A7 /* EmulationScreensController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmulationScreensController.swift; sourceTree = "<group>"; };
 		E6C651AA2B8C586C00EB0F71 /* Grape */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Grape; sourceTree = "<group>"; };
 		E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeEmulationController.swift; sourceTree = "<group>"; };
 		E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeGame.swift; sourceTree = "<group>"; };
@@ -331,6 +333,15 @@
 			path = fishhook;
 			sourceTree = "<group>";
 		};
+		E6AF9F7E2BA6B5B0002824A7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				E60427642BA164FD00120AD9 /* EmulationVirtualControllerController.swift */,
+				E6AF9F7F2BA6B8CE002824A7 /* EmulationScreensController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		E6C651AF2B8C5E5A00EB0F71 /* Games */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,11 +455,11 @@
 		E6D6ED062B85E88E00089AF2 /* EmulationControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E6AF9F7E2BA6B5B0002824A7 /* Base */,
 				E69647E42B90831F008F4759 /* CytrusEmulationController.swift */,
 				E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */,
 				E6D6ED072B85E89C00089AF2 /* KiwiEmulationController.swift */,
 				E6F3846C2B9AB2AD00A570F9 /* SudachiEmulationController.swift */,
-				E60427642BA164FD00120AD9 /* EmulationController.swift */,
 			);
 			path = EmulationControllers;
 			sourceTree = "<group>";
@@ -576,6 +587,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6AF9F802BA6B8CE002824A7 /* EmulationScreensController.swift in Sources */,
 				E6ABB2A32B95999700DF6F2A /* SudachiGame.swift in Sources */,
 				E69C45342B95F5C400EF49B7 /* fishhook.c in Sources */,
 				E69C45382B95F61A00EF49B7 /* JITEnabler.m in Sources */,
@@ -586,7 +598,7 @@
 				E6D6ECD82B85E0BC00089AF2 /* AppDelegate.swift in Sources */,
 				E6D6ED002B85E71800089AF2 /* LibraryManager.swift in Sources */,
 				E6F384832B9B049300A570F9 /* MissingFilesController.swift in Sources */,
-				E60427652BA164FD00120AD9 /* EmulationController.swift in Sources */,
+				E60427652BA164FD00120AD9 /* EmulationVirtualControllerController.swift in Sources */,
 				E6D6ECFC2B85E71800089AF2 /* LibraryController.swift in Sources */,
 				E6D6ECDA2B85E0BC00089AF2 /* SceneDelegate.swift in Sources */,
 				E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */,
@@ -758,8 +770,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 9.1;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -787,6 +800,7 @@
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lSudachi";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -808,8 +822,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 9.1;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -834,6 +849,7 @@
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lSudachi";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
