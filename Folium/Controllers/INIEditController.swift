@@ -42,7 +42,7 @@ class INIEditController : UIViewController, UITextViewDelegate {
             switch self.console {
 #if canImport(Cytrus)
             case .n3ds:
-                break
+                Cytrus.shared.settingsSaved()
 #endif
 #if canImport(Sudachi)
             case .nSwitch:
