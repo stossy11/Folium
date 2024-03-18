@@ -58,12 +58,20 @@ class EmulationVirtualControllerController : UIViewController, VirtualController
     }
     
     func controllerDidConnect(_ notification: Notification) {
+        guard let controller = notification.object as? GCController, let name = controller.vendorName, name != "Gamepad" else {
+            return
+        }
+        
         UIView.animate(withDuration: 0.2) {
             self.virtualControllerView.alpha = 0
         }
     }
     
     func controllerDidDisconnect(_ notification: Notification) {
+        guard let controller = notification.object as? GCController, let name = controller.vendorName, name != "Gamepad" else {
+            return
+        }
+        
         UIView.animate(withDuration: 0.2) {
             self.virtualControllerView.alpha = 1
         }
