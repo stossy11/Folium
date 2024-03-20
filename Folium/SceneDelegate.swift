@@ -33,16 +33,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             configuration.interSectionSpacing = 20
             
             let collectionViewLayout: UICollectionViewCompositionalLayout = .init(sectionProvider: { sectionIndex, layoutEnvironment in
-                let coreHasNoGames = cores[sectionIndex].games.isEmpty
-                
                 let iPad = UIDevice.current.userInterfaceIdiom == .pad
-                let itemsInGroup: CGFloat = if coreHasNoGames { 1 } else if UIApplication.shared.statusBarOrientation == .portrait {
+                let itemsInGroup: CGFloat = if sectionIndex == 0 { 1 } else if UIApplication.shared.statusBarOrientation == .portrait {
                     iPad ? 6 : 3
                 } else {
                     iPad ? 8 : 5
                 }
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemsInGroup), heightDimension: .estimated(300))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / itemsInGroup), heightDimension: .estimated(sectionIndex == 0 ? 120 : 300))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(300))
@@ -54,19 +52,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     .horizontal(layoutSize: groupSize, subitem: item, count: Int(itemsInGroup))
                 }
                 
+                if sectionIndex == 0 {
+                    group.contentInsets = .init(top: 0, leading: 20, bottom: 0, trailing: 20)
+                }
                 group.interItemSpacing = .fixed(20)
                 
                 let section = NSCollectionLayoutSection(group: group)
-                section.boundarySupplementaryItems = [
-                    .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44)),
-                          elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                ]
-                section.contentInsets = .init(top: 0, leading: 20, bottom: sectionIndex == cores.count ? 20 : 10, trailing: 20)
-                section.interGroupSpacing = 20
+                if sectionIndex > 0 {
+                    section.boundarySupplementaryItems = [
+                        .init(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44)),
+                              elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                    ]
+                }
+                section.contentInsets = .init(top: sectionIndex == 0 ? 20 : 0, leading: sectionIndex == 0 ? 0 : 20, bottom: sectionIndex == cores.count ? 20 : 0, trailing: sectionIndex == 0 ? 0 : 20)
+                section.interGroupSpacing = sectionIndex == 0 ? 0 : 20
+                if sectionIndex == 0 {
+                    section.orthogonalScrollingBehavior = .groupPaging
+                } else {
+                    section.orthogonalScrollingBehavior = .none
+                }
                 return section
             }, configuration: configuration)
             
             window.rootViewController = UINavigationController(rootViewController: LibraryController(collectionViewLayout: collectionViewLayout, cores: cores))
+            window.tintColor = .systemGreen
         }
         
         window.makeKeyAndVisible()

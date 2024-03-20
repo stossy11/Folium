@@ -14,6 +14,7 @@ class KiwiEmulationController : EmulationScreensController {
     fileprivate var displayLink: CADisplayLink!
     fileprivate var isRunning: Bool = false
     
+    fileprivate var kiwiGame: KiwiGame!
     fileprivate let kiwi = Kiwi.shared
     override init(game: AnyHashable) {
         super.init(game: game)
@@ -21,7 +22,9 @@ class KiwiEmulationController : EmulationScreensController {
             return
         }
         
-        kiwi.insert(game: game.fileURL)
+        kiwiGame = game
+        
+        kiwi.insert(game: kiwiGame.fileURL)
         
         displayLink = .init(target: self, selector: #selector(step))
         displayLink.preferredFrameRateRange = .init(minimum: 30, maximum: 60, preferred: 60)
@@ -29,6 +32,11 @@ class KiwiEmulationController : EmulationScreensController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
     }
     
     override func viewDidLayoutSubviews() {
@@ -41,7 +49,8 @@ class KiwiEmulationController : EmulationScreensController {
     }
     
     @objc fileprivate func step() {
-        guard let primaryScreen = primaryScreen as? UIImageView else {
+        guard let primaryScreen = primaryScreen as? UIImageView,
+              let primaryBlurredScreen = primaryBlurredScreen as? UIImageView else {
             return
         }
         
@@ -52,6 +61,9 @@ class KiwiEmulationController : EmulationScreensController {
         }
         
         primaryScreen.image = .init(cgImage: cgImage)
+        UIView.transition(with: primaryBlurredScreen, duration: 0.66, options: .transitionCrossDissolve) {
+            primaryBlurredScreen.image = .init(cgImage: cgImage)
+        }
     }
     
     // MARK: Physical Controller Delegates

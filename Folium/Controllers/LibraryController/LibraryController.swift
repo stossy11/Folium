@@ -13,49 +13,29 @@ import Sudachi
 #endif
 import UIKit
 
-enum RoundedCorners {
-    case all, bottom, none, top
-}
-
-class MinimalRoundedTextField : UITextField {
-    init(_ placeholder: String, _ roundedCorners: RoundedCorners = .none, _ radius: CGFloat = 15) {
-        super.init(frame: .zero)
-        self.backgroundColor = .secondarySystemBackground
-        self.placeholder = placeholder
-        
-        switch roundedCorners {
-        case .all:
-            self.layer.cornerCurve = .continuous
-            self.layer.cornerRadius = radius
-        case .bottom, .top:
-            self.layer.cornerCurve = .continuous
-            self.layer.cornerRadius = radius
-            self.layer.maskedCorners = roundedCorners == .bottom ? [.layerMinXMaxYCorner, .layerMaxXMaxYCorner] : [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        case .none:
-            break
-        }
+struct Help : Codable, Hashable, Identifiable {
+    var id = UUID()
+    
+    let text, secondaryText, tertiaryText: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(text)
+        hasher.combine(secondaryText)
+        hasher.combine(tertiaryText)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    static func < (lhs: Help, rhs: Help) -> Bool {
+        lhs.text < rhs.text
     }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 20, dy: 0)
-    }
-    
-    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return editingRect(forBounds: bounds)
-    }
-    
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return editingRect(forBounds: bounds)
+    static func == (lhs: Help, rhs: Help) -> Bool {
+        lhs.text == rhs.text
     }
 }
 
 class LibraryController : UICollectionViewController {
-    var dataSource: UICollectionViewDiffableDataSource<Core, AnyHashable>! = nil
-    var snapshot: NSDiffableDataSourceSnapshot<Core, AnyHashable>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<AnyHashable, AnyHashable>! = nil
+    var snapshot: NSDiffableDataSourceSnapshot<AnyHashable, AnyHashable>! = nil
     
     var cores: [Core]
     
@@ -124,14 +104,14 @@ class LibraryController : UICollectionViewController {
             cell.set(itemIdentifier.title, itemIdentifier.developer)
         }
         
-        let importGamesCellRegistration = UICollectionView.CellRegistration<ImportGamesCell, String> { cell, indexPath, itemIdentifier in
-            cell.set(itemIdentifier)
+        let helpCellRegistration = UICollectionView.CellRegistration<HelpCell, Help> { cell, indexPath, itemIdentifier in
+            cell.set(itemIdentifier.text, itemIdentifier.secondaryText, itemIdentifier.tertiaryText)
         }
         
         let supplementaryViewRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
             var contentConfiguration = UIListContentConfiguration.extraProminentInsetGroupedHeader()
             
-            guard let sectionIdentifier = self.dataSource.sectionIdentifier(for: indexPath.section) else {
+            guard let sectionIdentifier = self.dataSource.sectionIdentifier(for: indexPath.section) as? Core else {
                 return
             }
             
@@ -266,8 +246,6 @@ class LibraryController : UICollectionViewController {
         
         dataSource = .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case let string as String:
-                collectionView.dequeueConfiguredReusableCell(using: importGamesCellRegistration, for: indexPath, item: string)
 #if canImport(Cytrus)
             case let cytrusGame as CytrusGame:
                 collectionView.dequeueConfiguredReusableCell(using: cytrusGameCellRegistration, for: indexPath, item: cytrusGame)
@@ -280,16 +258,27 @@ class LibraryController : UICollectionViewController {
             case let sudachiGame as SudachiGame:
                 collectionView.dequeueConfiguredReusableCell(using: sudachiGameCellRegistration, for: indexPath, item: sudachiGame)
 #endif
+            case let help as Help:
+                collectionView.dequeueConfiguredReusableCell(using: helpCellRegistration, for: indexPath, item: help)
             default:
                 nil
             }
         }
         
         dataSource.supplementaryViewProvider = { collectionView, elementKind, indexPath in
-            collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryViewRegistration, for: indexPath)
+            switch indexPath.section {
+            case 0:
+                nil
+            default:
+                collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryViewRegistration, for: indexPath)
+            }
         }
         
         snapshot = .init()
+        snapshot.appendSections(["Help"])
+        snapshot.appendItems([
+            Help(text: "Getting Started", secondaryText: "Guides cannot be provided for legal reasons, Google is your friend", tertiaryText: "Jarrod Norwell")
+        ], toSection: "Help")
         snapshot.appendSections(cores.sorted())
         cores.forEach { core in
             if !core.missingFiles.contains(where: { $0.fileImportance == .required }), !core.games.isEmpty {
