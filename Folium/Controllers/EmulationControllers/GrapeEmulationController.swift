@@ -17,6 +17,7 @@ class GrapeEmulationController : EmulationScreensController {
     
     fileprivate var device: SDL_AudioDeviceID!
     
+    fileprivate var grapeGame: GrapeGame!
     fileprivate let grape = Grape.shared
     override init(game: AnyHashable) {
         super.init(game: game)
@@ -24,7 +25,9 @@ class GrapeEmulationController : EmulationScreensController {
             return
         }
         
-        grape.insert(game: game.fileURL)
+        grapeGame = game
+        
+        grape.insert(game: grapeGame.fileURL)
         
         displayLink = .init(target: self, selector: #selector(step))
         displayLink.preferredFrameRateRange = .init(minimum: 30, maximum: 60, preferred: 60)
@@ -60,16 +63,17 @@ class GrapeEmulationController : EmulationScreensController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !isRunning {
             isRunning = true
             
-            guard let game = game as? GrapeGame else {
-                return
-            }
-            
-            if !game.isGBA {
+            if !grapeGame.isGBA {
                 grape.updateScreenLayout(with: secondaryScreen.frame.size)
             }
             
@@ -79,45 +83,42 @@ class GrapeEmulationController : EmulationScreensController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        guard let game = game as? GrapeGame else {
-            return
-        }
-        
         coordinator.animate { _ in
-            if !game.isGBA {
+            if !self.grapeGame.isGBA {
                 self.grape.updateScreenLayout(with: self.secondaryScreen.frame.size)
             }
         }
     }
     
     @objc fileprivate func step() {
-        guard let game = game as? GrapeGame, let primaryScreen = primaryScreen as? UIImageView,
-        let secondaryScreen = secondaryScreen as? UIImageView else {
-            return
-        }
-        
         grape.step()
+        let screenFramebuffer = grape.screenFramebuffer(isGBA: grapeGame.isGBA)
         
-        let screenFramebuffer = grape.screenFramebuffer(isGBA: game.isGBA)
-        guard let topCGImage = cgImage(from: screenFramebuffer, width: game.isGBA ? 240 : 256, height: game.isGBA ? 160 : 192) else {
+        guard let primaryScreen = primaryScreen as? UIImageView, let primaryBlurredScreen = primaryBlurredScreen as? UIImageView,
+              let topCGImage = cgImage(from: screenFramebuffer, width: grapeGame.isGBA ? 240 : 256, height: grapeGame.isGBA ? 160 : 192) else {
             return
         }
         
         primaryScreen.image = .init(cgImage: topCGImage)
+        UIView.transition(with: primaryBlurredScreen, duration: 0.66, options: .transitionCrossDissolve) {
+            primaryBlurredScreen.image = .init(cgImage: topCGImage)
+        }
         
-        if !game.isGBA {
-            guard let bottomCGImage = cgImage(from: screenFramebuffer.advanced(by: 256 * 192), width: 256, height: 192) else {
-                return
-            }
-            
-            secondaryScreen.image = .init(cgImage: bottomCGImage)
+        guard let secondaryScreen = secondaryScreen as? UIImageView, let secondaryBlurredScreen = secondaryBlurredScreen as? UIImageView,
+              let bottomCGImage = cgImage(from: screenFramebuffer.advanced(by: 256 * 192), width: 256, height: 192) else {
+            return
+        }
+        
+        secondaryScreen.image = .init(cgImage: bottomCGImage)
+        UIView.transition(with: secondaryBlurredScreen, duration: 0.66, options: .transitionCrossDissolve) {
+            secondaryBlurredScreen.image = .init(cgImage: bottomCGImage)
         }
     }
     
     // MARK: Touch Delegates
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        guard let game = game as? GrapeGame, let touch = touches.first, touch.view == secondaryScreen, !game.isGBA else {
+        guard let touch = touches.first, touch.view == secondaryScreen, !grapeGame.isGBA else {
             return
         }
         
@@ -126,18 +127,14 @@ class GrapeEmulationController : EmulationScreensController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        guard let game = game as? GrapeGame else {
-            return
-        }
-        
-        if !game.isGBA {
+        if !grapeGame.isGBA {
             grape.touchEnded()
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        guard let game = game as? GrapeGame, let touch = touches.first, touch.view == secondaryScreen, !game.isGBA else {
+        guard let touch = touches.first, touch.view == secondaryScreen, !grapeGame.isGBA else {
             return
         }
         

@@ -8,14 +8,34 @@
 import Foundation
 import UIKit
 
+struct ScreenConfiguration {
+    static let borderColor: CGColor = UIColor.secondarySystemBackground.cgColor
+    static let borderWidth: CGFloat = 3
+    static let cornerRadius: CGFloat = 10
+}
+
 class EmulationScreensController : EmulationVirtualControllerController {
     var primaryScreen, secondaryScreen: UIView!
+    var primaryBlurredScreen, secondaryBlurredScreen: UIView!
+    fileprivate var visualEffectView: UIVisualEffectView!
+    
     fileprivate let device = MTLCreateSystemDefaultDevice()
     
     fileprivate var portraitConstraints, landscapeConstraints: [NSLayoutConstraint]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        
+        visualEffectView = .init(effect: UIBlurEffect(style: .systemMaterial))
+        visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(visualEffectView)
+        view.addConstraints([
+            visualEffectView.topAnchor.constraint(equalTo: view.topAnchor),
+            visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         
         switch game {
         case _ as CytrusGame:
@@ -59,25 +79,42 @@ class EmulationScreensController : EmulationVirtualControllerController {
         primaryScreen = UIImageView(frame: .zero)
         primaryScreen.translatesAutoresizingMaskIntoConstraints = false
         primaryScreen.clipsToBounds = true
-        primaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        primaryScreen.layer.borderWidth = 4
+        primaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        primaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
         primaryScreen.layer.cornerCurve = .continuous
-        primaryScreen.layer.cornerRadius = 8
+        primaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
         view.addSubview(primaryScreen)
+        
+        primaryBlurredScreen = UIImageView(frame: .zero)
+        primaryBlurredScreen.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(primaryBlurredScreen)
+        
         view.insertSubview(primaryScreen, belowSubview: virtualControllerView)
+        view.insertSubview(visualEffectView, belowSubview: primaryScreen)
+        view.insertSubview(primaryBlurredScreen, belowSubview: visualEffectView)
         
         portraitConstraints = [
             primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             primaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 2 / 3)
+            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 2 / 3),
+            
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: primaryScreen.bottomAnchor, constant: 10)
         ]
         
         landscapeConstraints = [
             primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             primaryScreen.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             primaryScreen.widthAnchor.constraint(equalTo: primaryScreen.heightAnchor, multiplier: 3 / 2),
-            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: primaryScreen.leadingAnchor, constant: -10),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: primaryScreen.trailingAnchor, constant: 10)
         ]
         
         view.addConstraints(UIApplication.shared.statusBarOrientation == .portrait ||
@@ -88,23 +125,35 @@ class EmulationScreensController : EmulationVirtualControllerController {
         primaryScreen = UIImageView(frame: .zero)
         primaryScreen.translatesAutoresizingMaskIntoConstraints = false
         primaryScreen.clipsToBounds = true
-        primaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        primaryScreen.layer.borderWidth = 4
+        primaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        primaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
         primaryScreen.layer.cornerCurve = .continuous
-        primaryScreen.layer.cornerRadius = 8
+        primaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
         view.addSubview(primaryScreen)
-        view.insertSubview(primaryScreen, belowSubview: virtualControllerView)
+        
+        primaryBlurredScreen = UIImageView(frame: .zero)
+        primaryBlurredScreen.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(primaryBlurredScreen)
         
         secondaryScreen = UIImageView(frame: .zero)
         secondaryScreen.translatesAutoresizingMaskIntoConstraints = false
         secondaryScreen.clipsToBounds = true
-        secondaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        secondaryScreen.layer.borderWidth = 4
+        secondaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        secondaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
         secondaryScreen.layer.cornerCurve = .continuous
-        secondaryScreen.layer.cornerRadius = 8
+        secondaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
         secondaryScreen.isUserInteractionEnabled = true
         view.addSubview(secondaryScreen)
+        
+        secondaryBlurredScreen = UIImageView(frame: .zero)
+        secondaryBlurredScreen.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(secondaryBlurredScreen)
+        
+        view.insertSubview(primaryScreen, belowSubview: virtualControllerView)
         view.insertSubview(secondaryScreen, belowSubview: virtualControllerView)
+        view.insertSubview(visualEffectView, belowSubview: primaryScreen)
+        view.insertSubview(primaryBlurredScreen, belowSubview: visualEffectView)
+        view.insertSubview(secondaryBlurredScreen, belowSubview: visualEffectView)
         
         portraitConstraints = [
             primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -112,10 +161,20 @@ class EmulationScreensController : EmulationVirtualControllerController {
             primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 4),
             
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: primaryScreen.bottomAnchor, constant: 5),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
             secondaryScreen.topAnchor.constraint(equalTo: primaryScreen.safeAreaLayoutGuide.bottomAnchor, constant: 10),
             secondaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             secondaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            secondaryScreen.heightAnchor.constraint(equalTo: secondaryScreen.widthAnchor, multiplier: 3 / 4)
+            secondaryScreen.heightAnchor.constraint(equalTo: secondaryScreen.widthAnchor, multiplier: 3 / 4),
+            
+            secondaryBlurredScreen.topAnchor.constraint(equalTo: secondaryScreen.topAnchor, constant: -5),
+            secondaryBlurredScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            secondaryBlurredScreen.bottomAnchor.constraint(equalTo: secondaryScreen.bottomAnchor, constant: 10),
+            secondaryBlurredScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         
         landscapeConstraints = [
@@ -124,10 +183,20 @@ class EmulationScreensController : EmulationVirtualControllerController {
             primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 4),
             primaryScreen.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             
+            primaryBlurredScreen.topAnchor.constraint(equalTo: primaryScreen.topAnchor, constant: -10),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: primaryScreen.leadingAnchor, constant: -10),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: primaryScreen.bottomAnchor, constant: 10),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: primaryScreen.trailingAnchor, constant: 5),
+            
             secondaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 5),
             secondaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             secondaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 4),
-            secondaryScreen.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+            secondaryScreen.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            
+            secondaryBlurredScreen.topAnchor.constraint(equalTo: secondaryScreen.topAnchor, constant: -10),
+            secondaryBlurredScreen.leadingAnchor.constraint(equalTo: secondaryScreen.leadingAnchor, constant: -5),
+            secondaryBlurredScreen.bottomAnchor.constraint(equalTo: secondaryScreen.bottomAnchor, constant: 10),
+            secondaryBlurredScreen.trailingAnchor.constraint(equalTo: secondaryScreen.trailingAnchor, constant: 10),
         ]
         
         view.addConstraints(UIApplication.shared.statusBarOrientation == .portrait ||
@@ -138,25 +207,42 @@ class EmulationScreensController : EmulationVirtualControllerController {
         primaryScreen = UIImageView(frame: .zero)
         primaryScreen.translatesAutoresizingMaskIntoConstraints = false
         primaryScreen.clipsToBounds = true
-        primaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        primaryScreen.layer.borderWidth = 4
+        primaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        primaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
         primaryScreen.layer.cornerCurve = .continuous
-        primaryScreen.layer.cornerRadius = 8
+        primaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
         view.addSubview(primaryScreen)
+        
+        primaryBlurredScreen = UIImageView(frame: .zero)
+        primaryBlurredScreen.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(primaryBlurredScreen)
+        
         view.insertSubview(primaryScreen, belowSubview: virtualControllerView)
+        view.insertSubview(visualEffectView, belowSubview: primaryScreen)
+        view.insertSubview(primaryBlurredScreen, belowSubview: visualEffectView)
         
         portraitConstraints = [
             primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             primaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 4)
+            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 4),
+            
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: primaryScreen.bottomAnchor, constant: 10)
         ]
         
         landscapeConstraints = [
             primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             primaryScreen.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             primaryScreen.widthAnchor.constraint(equalTo: primaryScreen.heightAnchor, multiplier: 4 / 3),
-            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: primaryScreen.leadingAnchor, constant: -10),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: primaryScreen.trailingAnchor, constant: 10)
         ]
         
         view.addConstraints(UIApplication.shared.statusBarOrientation == .portrait ||
@@ -169,8 +255,11 @@ class EmulationScreensController : EmulationVirtualControllerController {
     
     @objc fileprivate func traitDidChange() {
         primaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
-        if secondaryScreen.isDescendant(of: view) {
+        switch game {
+        case _ as GrapeGame:
             secondaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
+        default:
+            break
         }
     }
     

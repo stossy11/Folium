@@ -17,7 +17,6 @@
 		E69039412B9D5C6E00F6D78D /* SwiftSyntaxMacros in Frameworks */ = {isa = PBXBuildFile; productRef = E69039402B9D5C6E00F6D78D /* SwiftSyntaxMacros */; };
 		E69647E52B90831F008F4759 /* CytrusEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69647E42B90831F008F4759 /* CytrusEmulationController.swift */; };
 		E69C45272B95E9DF00EF49B7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6ABB2DB2B95A2B700DF6F2A /* CoreBluetooth.framework */; };
-		E69C452B2B95F31E00EF49B7 /* ImportGamesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */; };
 		E69C45342B95F5C400EF49B7 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = E69C452F2B95F5C400EF49B7 /* fishhook.c */; };
 		E69C45362B95F5C400EF49B7 /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E69C45332B95F5C400EF49B7 /* utils.m */; };
 		E69C45382B95F61A00EF49B7 /* JITEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = E69C45372B95F61A00EF49B7 /* JITEnabler.m */; };
@@ -61,6 +60,8 @@
 		E6AEBA442B95B998005E8433 /* libswscale.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA312B95B98C005E8433 /* libswscale.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6AEBA462B95BA43005E8433 /* boost_context.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA452B95BA43005E8433 /* boost_context.xcframework */; };
 		E6AF9F802BA6B8CE002824A7 /* EmulationScreensController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AF9F7F2BA6B8CE002824A7 /* EmulationScreensController.swift */; };
+		E6C51FB12BAAAB9E00E06EBF /* MinimalRoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C51FB02BAAAB9E00E06EBF /* MinimalRoundedTextField.swift */; };
+		E6C51FB32BAAAC0B00E06EBF /* HelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C51FB22BAAAC0B00E06EBF /* HelpCell.swift */; };
 		E6C651AC2B8C5D4500EB0F71 /* GrapeEmulationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */; };
 		E6C651B12B8C5E8700EB0F71 /* GrapeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */; };
 		E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C651B22B8C5E9C00EB0F71 /* KiwiGame.swift */; };
@@ -131,7 +132,6 @@
 		E673FDDA2B907117002F2B7D /* Cytrus.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cytrus.xcodeproj; path = Cytrus/Cytrus.xcodeproj; sourceTree = "<group>"; };
 		E69647D72B908166008F4759 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		E69647E42B90831F008F4759 /* CytrusEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CytrusEmulationController.swift; sourceTree = "<group>"; };
-		E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportGamesCell.swift; sourceTree = "<group>"; };
 		E69C452D2B95F5C400EF49B7 /* Folium-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Folium-Bridging-Header.h"; sourceTree = "<group>"; };
 		E69C452E2B95F5C400EF49B7 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		E69C452F2B95F5C400EF49B7 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
@@ -170,6 +170,8 @@
 		E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavcodec.xcframework; sourceTree = "<group>"; };
 		E6AEBA452B95BA43005E8433 /* boost_context.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = boost_context.xcframework; sourceTree = "<group>"; };
 		E6AF9F7F2BA6B8CE002824A7 /* EmulationScreensController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmulationScreensController.swift; sourceTree = "<group>"; };
+		E6C51FB02BAAAB9E00E06EBF /* MinimalRoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalRoundedTextField.swift; sourceTree = "<group>"; };
+		E6C51FB22BAAAC0B00E06EBF /* HelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCell.swift; sourceTree = "<group>"; };
 		E6C651AA2B8C586C00EB0F71 /* Grape */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Grape; sourceTree = "<group>"; };
 		E6C651AB2B8C5D4500EB0F71 /* GrapeEmulationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeEmulationController.swift; sourceTree = "<group>"; };
 		E6C651B02B8C5E8700EB0F71 /* GrapeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapeGame.swift; sourceTree = "<group>"; };
@@ -342,6 +344,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		E6C51FAF2BAAAB8B00E06EBF /* MinimalRoundedTextField */ = {
+			isa = PBXGroup;
+			children = (
+				E6C51FB02BAAAB9E00E06EBF /* MinimalRoundedTextField.swift */,
+			);
+			path = MinimalRoundedTextField;
+			sourceTree = "<group>";
+		};
 		E6C651AF2B8C5E5A00EB0F71 /* Games */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,8 +423,8 @@
 		E6D6ECF22B85E71800089AF2 /* LibraryCells */ = {
 			isa = PBXGroup;
 			children = (
-				E69C452A2B95F31E00EF49B7 /* ImportGamesCell.swift */,
 				E6D6ECF02B85E71800089AF2 /* GameCell.swift */,
+				E6C51FB22BAAAC0B00E06EBF /* HelpCell.swift */,
 				E6D6ECF12B85E71800089AF2 /* MissingFileCell.swift */,
 			);
 			path = LibraryCells;
@@ -442,10 +452,11 @@
 		E6D6ECFB2B85E71800089AF2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E69C452C2B95F59F00EF49B7 /* JITEnabler */,
 				E670A9F52B8728DC0006CBCD /* BlurredButtons */,
+				E69C452C2B95F59F00EF49B7 /* JITEnabler */,
 				E6D6ECF22B85E71800089AF2 /* LibraryCells */,
 				E6D6ECF52B85E71800089AF2 /* LibraryManager */,
+				E6C51FAF2BAAAB8B00E06EBF /* MinimalRoundedTextField */,
 				E6D6ECF92B85E71800089AF2 /* VirtualController */,
 				E6D6ECFA2B85E71800089AF2 /* Bruno.swift */,
 			);
@@ -593,13 +604,14 @@
 				E69C45382B95F61A00EF49B7 /* JITEnabler.m in Sources */,
 				E670A9F92B8729200006CBCD /* BlurredImageButton.swift in Sources */,
 				E6D6ED052B85E71800089AF2 /* Bruno.swift in Sources */,
-				E69C452B2B95F31E00EF49B7 /* ImportGamesCell.swift in Sources */,
 				E6D6ECFE2B85E71800089AF2 /* GameCell.swift in Sources */,
+				E6C51FB12BAAAB9E00E06EBF /* MinimalRoundedTextField.swift in Sources */,
 				E6D6ECD82B85E0BC00089AF2 /* AppDelegate.swift in Sources */,
 				E6D6ED002B85E71800089AF2 /* LibraryManager.swift in Sources */,
 				E6F384832B9B049300A570F9 /* MissingFilesController.swift in Sources */,
 				E60427652BA164FD00120AD9 /* EmulationVirtualControllerController.swift in Sources */,
 				E6D6ECFC2B85E71800089AF2 /* LibraryController.swift in Sources */,
+				E6C51FB32BAAAC0B00E06EBF /* HelpCell.swift in Sources */,
 				E6D6ECDA2B85E0BC00089AF2 /* SceneDelegate.swift in Sources */,
 				E6C651B32B8C5E9C00EB0F71 /* KiwiGame.swift in Sources */,
 				E6D6ED032B85E71800089AF2 /* VirtualControllerButtonDelegate.swift in Sources */,
@@ -772,7 +784,7 @@
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.1;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -796,7 +808,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -824,7 +836,7 @@
 				CODE_SIGN_ENTITLEMENTS = Folium/Folium.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.1;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z3ZEABYY6P;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -845,7 +857,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				"OTHER_LDFLAGS[sdk=iphoneos*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
