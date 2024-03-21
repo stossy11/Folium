@@ -13,7 +13,7 @@ import Sudachi
 #endif
 import UIKit
 
-struct Help : Codable, Hashable, Identifiable {
+struct Help : Comparable, Hashable, Identifiable {
     var id = UUID()
     
     let text, secondaryText, tertiaryText: String
@@ -277,8 +277,8 @@ class LibraryController : UICollectionViewController {
         snapshot = .init()
         snapshot.appendSections(["Help"])
         snapshot.appendItems([
-            Help(text: "Getting Started", secondaryText: "Guides cannot be provided for legal reasons, Google is your friend", tertiaryText: "Jarrod Norwell")
-        ], toSection: "Help")
+            Help(text: "Folium", secondaryText: "Folium is a multi-system emulator currently supporting GBA, N3DS, NDS, NES and NS", tertiaryText: "Developed by Jarrod Norwell")
+        ].sorted(), toSection: "Help")
         snapshot.appendSections(cores.sorted())
         cores.forEach { core in
             if !core.missingFiles.contains(where: { $0.fileImportance == .required }), !core.games.isEmpty {
@@ -308,11 +308,11 @@ class LibraryController : UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
-        .init(previewProvider: {
-            guard let indexPath = collectionView.indexPathForItem(at: point), let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
-                return .init()
-            }
-            
+        guard let indexPath = collectionView.indexPathForItem(at: point), let cell = collectionView.cellForItem(at: indexPath) as? GameCell else {
+            return nil
+        }
+        
+        return .init(previewProvider: {
             let vc = UIViewController()
             let imageView = UIImageView(image: cell.imageView.image ?? cell.missingImageView.image)
             imageView.contentMode = .scaleAspectFit

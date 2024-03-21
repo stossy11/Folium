@@ -45,7 +45,6 @@
 		E6AEBA1F2B95B699005E8433 /* libMachineIndependent.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA1C2B95B699005E8433 /* libMachineIndependent.xcframework */; };
 		E6AEBA202B95B699005E8433 /* libGenericCodeGen.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA1D2B95B699005E8433 /* libGenericCodeGen.xcframework */; };
 		E6AEBA292B95B92A005E8433 /* OpenSSL in Frameworks */ = {isa = PBXBuildFile; productRef = E6AEBA282B95B92A005E8433 /* OpenSSL */; };
-		E6AEBA2C2B95B94A005E8433 /* lz4 in Frameworks */ = {isa = PBXBuildFile; productRef = E6AEBA2B2B95B94A005E8433 /* lz4 */; };
 		E6AEBA392B95B998005E8433 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */; };
 		E6AEBA3A2B95B998005E8433 /* libavcodec.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA322B95B98C005E8433 /* libavcodec.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6AEBA3B2B95B998005E8433 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AEBA2D2B95B98C005E8433 /* libavfilter.xcframework */; };
@@ -204,7 +203,6 @@
 			files = (
 				E6ABB2E32B95A47400DF6F2A /* libenet.xcframework in Frameworks */,
 				E6AEBA1E2B95B699005E8433 /* libglslang.xcframework in Frameworks */,
-				E6AEBA2C2B95B94A005E8433 /* lz4 in Frameworks */,
 				E6AEBA3B2B95B998005E8433 /* libavfilter.xcframework in Frameworks */,
 				E6ABB2C62B95A0C800DF6F2A /* libsirit.xcframework in Frameworks */,
 				E69039412B9D5C6E00F6D78D /* SwiftSyntaxMacros in Frameworks */,
@@ -506,7 +504,6 @@
 				E6F8D7062B8F0BAB00D2E15B /* Grape */,
 				E6ABB2E02B95A41D00DF6F2A /* SDL */,
 				E6AEBA282B95B92A005E8433 /* OpenSSL */,
-				E6AEBA2B2B95B94A005E8433 /* lz4 */,
 				E690393E2B9D5C6E00F6D78D /* SwiftSyntax */,
 				E69039402B9D5C6E00F6D78D /* SwiftSyntaxMacros */,
 			);
@@ -542,7 +539,6 @@
 			packageReferences = (
 				E6ABB2DF2B95A41D00DF6F2A /* XCRemoteSwiftPackageReference "SwiftSDL2" */,
 				E6AEBA272B95B92A005E8433 /* XCRemoteSwiftPackageReference "OpenSSL" */,
-				E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */,
 				E690393D2B9D5C6E00F6D78D /* XCRemoteSwiftPackageReference "swift-syntax" */,
 			);
 			productRefGroup = E6D6ECD52B85E0BC00089AF2 /* Products */;
@@ -808,8 +804,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
-				MARKETING_VERSION = 1.1.0;
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = "";
+				MARKETING_VERSION = 1.1.1;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -857,8 +853,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
-				MARKETING_VERSION = 1.1.0;
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = "";
+				MARKETING_VERSION = 1.1.1;
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
 				PRODUCT_BUNDLE_IDENTIFIER = com.antique.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -923,14 +919,6 @@
 				minimumVersion = 3.1.4000;
 			};
 		};
-		E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/milch/lz4-spm";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -953,11 +941,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E6AEBA272B95B92A005E8433 /* XCRemoteSwiftPackageReference "OpenSSL" */;
 			productName = OpenSSL;
-		};
-		E6AEBA2B2B95B94A005E8433 /* lz4 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E6AEBA2A2B95B94A005E8433 /* XCRemoteSwiftPackageReference "lz4-spm" */;
-			productName = lz4;
 		};
 		E6D6ED0A2B85E93800089AF2 /* Kiwi */ = {
 			isa = XCSwiftPackageProductDependency;

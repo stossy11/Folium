@@ -13,9 +13,7 @@ class HelpCell : UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .tintColor.withAlphaComponent(0.09)
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.tintColor.cgColor
+        backgroundColor = .secondarySystemBackground
         layer.cornerCurve = .continuous
         layer.cornerRadius = 15
         
@@ -55,23 +53,23 @@ class HelpCell : UICollectionViewCell {
             tertiaryTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             tertiaryTextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
-        
-        if #available(iOS 17, *) {
-            registerForTraitChanges([UITraitUserInterfaceStyle.self], action: #selector(traitDidChange))
-        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc fileprivate func traitDidChange() {
-        layer.borderColor = UIColor.tintColor.cgColor
-    }
-    
     func set(_ text: String, _ secondaryText: String, _ tertiaryText: String) {
         textLabel.text = text
         secondaryTextLabel.text = secondaryText
         tertiaryTextLabel.text = tertiaryText
+        
+        tertiaryTextLabel.textColor = if tertiaryText == "Cytrus" {
+            .systemYellow
+        } else if tertiaryText == "Sudachi" {
+            .systemGreen
+        } else {
+            .secondaryLabel
+        }
     }
 }

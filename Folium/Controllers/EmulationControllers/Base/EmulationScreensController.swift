@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MetalKit
 import UIKit
 
 struct ScreenConfiguration {
@@ -39,7 +40,7 @@ class EmulationScreensController : EmulationVirtualControllerController {
         
         switch game {
         case _ as CytrusGame:
-            setupCytrusScreen()
+            setupCytrusScreens()
         case let grapeGame as GrapeGame:
             grapeGame.isGBA ? setupGrapeScreen() : setupGrapeScreens()
         case _ as KiwiGame:
@@ -71,8 +72,56 @@ class EmulationScreensController : EmulationVirtualControllerController {
         }
     }
     
-    func setupCytrusScreen() {
+    func setupCytrusScreens() {
+        primaryScreen = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
+        primaryScreen.translatesAutoresizingMaskIntoConstraints = false
+        primaryScreen.clipsToBounds = true
+        primaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        primaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
+        primaryScreen.layer.cornerCurve = .continuous
+        primaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
+        view.addSubview(primaryScreen)
         
+        secondaryScreen = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
+        secondaryScreen.translatesAutoresizingMaskIntoConstraints = false
+        secondaryScreen.clipsToBounds = true
+        secondaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        secondaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
+        secondaryScreen.layer.cornerCurve = .continuous
+        secondaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
+        secondaryScreen.isUserInteractionEnabled = true
+        view.addSubview(secondaryScreen)
+        
+        view.insertSubview(primaryScreen, belowSubview: virtualControllerView)
+        view.insertSubview(secondaryScreen, belowSubview: virtualControllerView)
+        view.insertSubview(visualEffectView, belowSubview: primaryScreen)
+        
+        portraitConstraints = [
+            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            primaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 5),
+            
+            secondaryScreen.topAnchor.constraint(equalTo: primaryScreen.safeAreaLayoutGuide.bottomAnchor, constant: 10),
+            secondaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            secondaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            secondaryScreen.heightAnchor.constraint(equalTo: secondaryScreen.widthAnchor, multiplier: 3 / 4)
+        ]
+        
+        landscapeConstraints = [
+            primaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -5),
+            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 5),
+            primaryScreen.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            
+            secondaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 5),
+            secondaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            secondaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 3 / 4),
+            secondaryScreen.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ]
+        
+        view.addConstraints(UIApplication.shared.statusBarOrientation == .portrait ||
+                            UIApplication.shared.statusBarOrientation == .portraitUpsideDown ? portraitConstraints : landscapeConstraints)
     }
     
     func setupGrapeScreen() {
@@ -256,7 +305,7 @@ class EmulationScreensController : EmulationVirtualControllerController {
     @objc fileprivate func traitDidChange() {
         primaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         switch game {
-        case _ as GrapeGame:
+        case _ as CytrusGame, _ as GrapeGame:
             secondaryScreen.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         default:
             break
