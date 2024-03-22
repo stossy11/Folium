@@ -11,8 +11,10 @@ import UIKit
 class VirtualControllerView : UIView {
     var virtualButtonDelegate: VirtualControllerButtonDelegate
     
-    fileprivate var dpadView, xybaView: UIView!
+    var dpadView, xybaView: UIView!
     fileprivate var dpadUpButton, dpadLeftButton, dpadDownButton, dpadRightButton: VirtualControllerButton!
+    
+    fileprivate var leftThumbstickView, rightThumbstickView: UIView!
     
     fileprivate var aButton, bButton, xButton, yButton: VirtualControllerButton!
     
@@ -112,6 +114,7 @@ class VirtualControllerView : UIView {
     fileprivate func addDpadView() {
         dpadView = .init()
         dpadView.translatesAutoresizingMaskIntoConstraints = false
+        dpadView.isUserInteractionEnabled = true
         addSubview(dpadView)
         
         let portraitWidthConstraint = if UIDevice.current.userInterfaceIdiom == .phone {
@@ -151,6 +154,7 @@ class VirtualControllerView : UIView {
     fileprivate func addXYBAView() {
         xybaView = .init()
         xybaView.translatesAutoresizingMaskIntoConstraints = false
+        xybaView.isUserInteractionEnabled = true
         addSubview(xybaView)
         
         let portraitWidthConstraint = if UIDevice.current.userInterfaceIdiom == .phone {

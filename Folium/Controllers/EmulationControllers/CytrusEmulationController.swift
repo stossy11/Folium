@@ -74,25 +74,74 @@ class CytrusEmulationController : EmulationScreensController {
     // MARK: Touch Delegates
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        guard let touch = touches.first, touch.view == secondaryScreen else {
+        guard let touch = touches.first else {
             return
         }
         
-        cytrus.touchBegan(at: touch.location(in: secondaryScreen))
+        func position(in view: UIView, with location: CGPoint) -> (x: Float, y: Float) {
+            let radius = view.frame.width / 2
+            return (Float((location.x - radius) / radius), Float(-(location.y - radius) / radius))
+        }
+        
+        switch touch.view {
+        case virtualControllerView.dpadView:
+            cytrus.thumbstickMoved(.circlePad, x: position(in: virtualControllerView.dpadView,
+                                                           with: touch.location(in: virtualControllerView.dpadView)).x,
+                                   y: position(in: virtualControllerView.dpadView, with: touch.location(in: virtualControllerView.dpadView)).y)
+        case virtualControllerView.xybaView:
+            cytrus.thumbstickMoved(.cStick, x: position(in: virtualControllerView.xybaView,
+                                                           with: touch.location(in: virtualControllerView.xybaView)).x,
+                                   y: position(in: virtualControllerView.xybaView, with: touch.location(in: virtualControllerView.xybaView)).y)
+        case secondaryScreen:
+            cytrus.touchBegan(at: touch.location(in: secondaryScreen))
+        default:
+            break
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        cytrus.touchEnded()
+        guard let touch = touches.first else {
+            return
+        }
+        
+        switch touch.view {
+        case virtualControllerView.dpadView:
+            cytrus.thumbstickMoved(.circlePad, x: 0, y: 0)
+        case virtualControllerView.xybaView:
+            cytrus.thumbstickMoved(.cStick, x: 0, y: 0)
+        case secondaryScreen:
+            cytrus.touchEnded()
+        default:
+            break
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        guard let touch = touches.first, touch.view == secondaryScreen else {
+        guard let touch = touches.first else {
             return
         }
         
-        cytrus.touchMoved(at: touch.location(in: secondaryScreen))
+        func position(in view: UIView, with location: CGPoint) -> (x: Float, y: Float) {
+            let radius = view.frame.width / 2
+            return (Float((location.x - radius) / radius), Float(-(location.y - radius) / radius))
+        }
+        
+        switch touch.view {
+        case virtualControllerView.dpadView:
+            cytrus.thumbstickMoved(.circlePad, x: position(in: virtualControllerView.dpadView,
+                                                           with: touch.location(in: virtualControllerView.dpadView)).x,
+                                   y: position(in: virtualControllerView.dpadView, with: touch.location(in: virtualControllerView.dpadView)).y)
+        case virtualControllerView.xybaView:
+            cytrus.thumbstickMoved(.cStick, x: position(in: virtualControllerView.xybaView,
+                                                           with: touch.location(in: virtualControllerView.xybaView)).x,
+                                   y: position(in: virtualControllerView.xybaView, with: touch.location(in: virtualControllerView.xybaView)).y)
+        case secondaryScreen:
+            cytrus.touchMoved(at: touch.location(in: secondaryScreen))
+        default:
+            break
+        }
     }
     
     // MARK: Physical Controller Delegates
