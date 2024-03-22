@@ -232,7 +232,8 @@ class LibraryController : UICollectionViewController {
             case .nds:
                 supplementaryView.accessories = [
                     bootOSView,
-                    importGamesView
+                    importGamesView,
+                    coreSettingsView
                 ]
                 
                 if !sectionIdentifier.missingFiles.isEmpty {

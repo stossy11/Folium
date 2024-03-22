@@ -104,6 +104,7 @@ class DirectoriesManager {
                 ]
             ],
             "Grape" : [
+                "config" : [:],
                 "roms" : [:],
                 "sysdata" : [
                     "bios7.bin" : .required,

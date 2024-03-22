@@ -56,7 +56,7 @@ class KiwiEmulationController : EmulationScreensController {
         
         kiwi.step()
         
-        guard let cgImage = cgImage(from: kiwi.screenFramebuffer(), width: 256, height: 240) else {
+        guard let cgImage = cgImage(from: kiwi.screenFramebuffer(), width: 256 * 6, height: 240 * 6) else {
             return
         }
         

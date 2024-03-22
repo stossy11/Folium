@@ -1,5 +1,5 @@
 {
-  "originHash" : "bac3c6a263ff8c74afade7d2260c094ef6909a51726e49076ceec28d6e7d701a",
+  "originHash" : "701d5e9fa933acfad0c2c128d8013abe466908f86163c30635258c58a9a34d73",
   "pins" : [
     {
       "identity" : "lz4-spm",
@@ -38,12 +38,21 @@
       }
     },
     {
+      "identity" : "xbrz",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jarrodnorwell/XBRZ",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0e96bf3fc42d83db42b4f5d4b3a21e97a7586979"
+      }
+    },
+    {
       "identity" : "zstd",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/facebook/zstd",
       "state" : {
         "branch" : "dev",
-        "revision" : "0fcdc62c2d13f4d978ecba703c7d381ce97c97f1"
+        "revision" : "78f732cfdd65bccc76d7da2ae103e141e5ca5742"
       }
     }
   ],

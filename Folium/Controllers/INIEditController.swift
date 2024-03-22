@@ -8,7 +8,7 @@
 #if canImport(Cytrus)
 import Cytrus
 #endif
-
+import Grape
 #if canImport(Sudachi)
 import Sudachi
 #endif
@@ -40,6 +40,8 @@ class INIEditController : UIViewController, UITextViewDelegate {
             self.save()
             
             switch self.console {
+            case .nds:
+                Grape.shared.settingsSaved()
 #if canImport(Cytrus)
             case .n3ds:
                 Cytrus.shared.settingsSaved()
