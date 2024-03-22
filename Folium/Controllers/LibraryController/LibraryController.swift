@@ -72,6 +72,21 @@ class LibraryController : UICollectionViewController {
             navigationItem.leftBarButtonItem?.isEnabled = false
         }
         
+        let refreshControl = UIRefreshControl(frame: .zero, primaryAction: .init(handler: { action in
+            guard let refreshControl = action.sender as? UIRefreshControl else {
+                return
+            }
+            
+            refreshControl.beginRefreshing()
+            Task {
+                try await self.updateDataSource(true)
+                refreshControl.endRefreshing()
+            }
+        }))
+        collectionView.refreshControl = refreshControl
+        
+        
+        
         let cytrusGameCellRegistration = UICollectionView.CellRegistration<GameCell, CytrusGame> { cell, indexPath, itemIdentifier in
             if let image = itemIdentifier.imageData.decodeRGB565(width: 48, height: 48) {
                 cell.imageView.image = image
@@ -274,36 +289,8 @@ class LibraryController : UICollectionViewController {
             }
         }
         
-        snapshot = .init()
-        snapshot.appendSections(["Help"])
-        snapshot.appendItems([
-            Help(text: "Folium", secondaryText: "Folium is a multi-system emulator currently supporting GBA, N3DS, NDS, NES and NS", tertiaryText: "Developed by Jarrod Norwell")
-        ].sorted(), toSection: "Help")
-        snapshot.appendSections(cores.sorted())
-        cores.forEach { core in
-            if !core.missingFiles.contains(where: { $0.fileImportance == .required }), !core.games.isEmpty {
-                switch core.games {
-#if canImport(Cytrus)
-                case let cytrusGames as [CytrusGame]:
-                    snapshot.appendItems(cytrusGames.sorted(), toSection: core)
-#endif
-                case let grapeGames as [GrapeGame]:
-                    snapshot.appendItems(grapeGames.sorted(), toSection: core)
-                case let kiwiGames as [KiwiGame]:
-                    snapshot.appendItems(kiwiGames.sorted(), toSection: core)
-#if canImport(Sudachi)
-                case let sudachiGames as [SudachiGame]:
-                    Sudachi.shared.insert(games: sudachiGames.reduce(into: [URL](), { $0.append($1.fileURL) }))
-                    snapshot.appendItems(sudachiGames.sorted(), toSection: core)
-#endif
-                default:
-                    break
-                }
-            }
-        }
-        
         Task {
-            await dataSource.apply(snapshot)
+            try await updateDataSource()
         }
     }
     
@@ -371,6 +358,49 @@ class LibraryController : UICollectionViewController {
         default:
             break
         }
+    }
+    
+    @objc fileprivate func updateDataSource(_ isRefresh: Bool = false) async throws {
+        if isRefresh {
+            cores = []
+            cores = try LibraryManager.shared.library()
+            
+            snapshot.deleteAllItems()
+            snapshot.deleteSections(["Help"])
+            snapshot.deleteSections(cores.sorted())
+            
+            await dataSource.apply(snapshot)
+        }
+        
+        snapshot = .init()
+        snapshot.appendSections(["Help"])
+        snapshot.appendItems([
+            Help(text: "Folium", secondaryText: "Folium is a multi-system emulator currently supporting GBA, N3DS, NDS, NES and NS", tertiaryText: "Developed by Jarrod Norwell")
+        ].sorted(), toSection: "Help")
+        snapshot.appendSections(cores.sorted())
+        cores.forEach { core in
+            if !core.missingFiles.contains(where: { $0.fileImportance == .required }), !core.games.isEmpty {
+                switch core.games {
+#if canImport(Cytrus)
+                case let cytrusGames as [CytrusGame]:
+                    snapshot.appendItems(cytrusGames.sorted(), toSection: core)
+#endif
+                case let grapeGames as [GrapeGame]:
+                    snapshot.appendItems(grapeGames.sorted(), toSection: core)
+                case let kiwiGames as [KiwiGame]:
+                    snapshot.appendItems(kiwiGames.sorted(), toSection: core)
+#if canImport(Sudachi)
+                case let sudachiGames as [SudachiGame]:
+                    Sudachi.shared.insert(games: sudachiGames.reduce(into: [URL](), { $0.append($1.fileURL) }))
+                    snapshot.appendItems(sudachiGames.sorted(), toSection: core)
+#endif
+                default:
+                    break
+                }
+            }
+        }
+        
+        await dataSource.apply(snapshot)
     }
     
     fileprivate func cgImage(from screenFramebuffer: UnsafeMutablePointer<UInt32>, width: Int, height: Int) -> CGImage? {

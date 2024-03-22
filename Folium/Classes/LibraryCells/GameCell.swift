@@ -67,6 +67,7 @@ class GameCell : UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        missingImageView.image = nil
     }
     
     func set(_ text: String, _ secondaryText: String) {
