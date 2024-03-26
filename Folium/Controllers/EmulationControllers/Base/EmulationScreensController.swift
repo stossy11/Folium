@@ -299,7 +299,49 @@ class EmulationScreensController : EmulationVirtualControllerController {
     }
     
     func setupSudachiScreen() {
+        primaryScreen = MTKView(frame: .zero, device: MTLCreateSystemDefaultDevice())
+        primaryScreen.translatesAutoresizingMaskIntoConstraints = false
+        primaryScreen.clipsToBounds = true
+        primaryScreen.layer.borderColor = ScreenConfiguration.borderColor
+        primaryScreen.layer.borderWidth = ScreenConfiguration.borderWidth
+        primaryScreen.layer.cornerCurve = .continuous
+        primaryScreen.layer.cornerRadius = ScreenConfiguration.cornerRadius
+        view.addSubview(primaryScreen)
         
+        primaryBlurredScreen = UIImageView(frame: .zero)
+        primaryBlurredScreen.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(primaryBlurredScreen)
+        
+        view.insertSubview(primaryScreen, belowSubview: virtualControllerView)
+        view.insertSubview(visualEffectView, belowSubview: primaryScreen)
+        view.insertSubview(primaryBlurredScreen, belowSubview: visualEffectView)
+        
+        portraitConstraints = [
+            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            primaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 9 / 16),
+            
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: primaryScreen.bottomAnchor, constant: 10)
+        ]
+        
+        landscapeConstraints = [
+            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            primaryScreen.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            primaryScreen.widthAnchor.constraint(equalTo: primaryScreen.heightAnchor, multiplier: 16 / 9),
+            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
+            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
+            primaryBlurredScreen.leadingAnchor.constraint(equalTo: primaryScreen.leadingAnchor, constant: -10),
+            primaryBlurredScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            primaryBlurredScreen.trailingAnchor.constraint(equalTo: primaryScreen.trailingAnchor, constant: 10)
+        ]
+        
+        view.addConstraints(UIApplication.shared.statusBarOrientation == .portrait ||
+                            UIApplication.shared.statusBarOrientation == .portraitUpsideDown ? portraitConstraints : landscapeConstraints)
     }
     
     @objc fileprivate func traitDidChange() {

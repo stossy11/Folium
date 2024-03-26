@@ -146,9 +146,10 @@ class LibraryController : UICollectionViewController {
                     switch sectionIdentifier.console {
 #if canImport(Sudachi)
                     case .nSwitch:
-                        let sudachiEmulationController = SudachiEmulationController(game: nil)
-                        sudachiEmulationController.modalPresentationStyle = .fullScreen
-                        self.present(sudachiEmulationController, animated: true)
+                        // let sudachiEmulationController = SudachiEmulationController(game: nil)
+                        // sudachiEmulationController.modalPresentationStyle = .fullScreen
+                        // self.present(sudachiEmulationController, animated: true)
+                        break
 #endif
                     default:
                         break
@@ -249,7 +250,7 @@ class LibraryController : UICollectionViewController {
                 }
             case .nSwitch:
                 supplementaryView.accessories = [
-                    bootOSView,
+                    //bootOSView,
                     importGamesView,
                     coreSettingsView
                 ]
