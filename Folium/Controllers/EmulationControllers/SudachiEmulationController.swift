@@ -235,7 +235,7 @@ class SudachiEmulationController : EmulationScreensController {
         case .a:
             sudachi.virtualControllerButtonDown(.A)
         case .e:
-            sudachi.virtualControllerButtonDown(.A) //i want it to do the same thing as a to test it
+            exit()
         case .b:
             sudachi.virtualControllerButtonDown(.B)
         case .x:
@@ -271,7 +271,7 @@ class SudachiEmulationController : EmulationScreensController {
         case .a:
             sudachi.virtualControllerButtonUp(.A)
         case .e:
-            sudachi.virtualControllerButtonUp(.A)
+            exit()
         case .b:
             sudachi.virtualControllerButtonUp(.B)
         case .x:
@@ -287,6 +287,11 @@ class SudachiEmulationController : EmulationScreensController {
         case .zr:
             sudachi.virtualControllerButtonUp(.triggerZR)
         }
+    }
+    func exit() {
+        self.dismiss(animated: true)
+        isRunning = false
+        thread.cancel()
     }
 }
 

@@ -292,7 +292,7 @@ class VirtualControllerView : UIView {
         xybaView.addSubview(eButton)
         
         addConstraints([
-            eButton.leadingAnchor.constraint(equalTo: xybaView.leadingAnchor),
+            eButton.leadingAnchor.constraint(equalTo: xybaView.leadingAnchor, constant: 90),
             eButton.bottomAnchor.constraint(equalTo: xybaView.bottomAnchor),
             eButton.widthAnchor.constraint(equalTo: xybaView.widthAnchor, multiplier: 1 / 5),
             eButton.heightAnchor.constraint(equalTo: xybaView.heightAnchor, multiplier: 1 / 5)
