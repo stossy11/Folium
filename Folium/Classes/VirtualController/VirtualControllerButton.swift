@@ -10,7 +10,7 @@ import UIKit
 
 class VirtualControllerButton : UIView {
     enum ButtonType : String {
-        case a = "a", b = "b", x = "x", y = "y"
+        case a = "a", b = "b", x = "x", y = "y", e = "xmark"
         case minus = "minus", plus = "plus"
         case dpadUp = "arrowtriangle.up", dpadLeft = "arrowtriangle.left", dpadDown = "arrowtriangle.down",
              dpadRight = "arrowtriangle.right"
@@ -25,7 +25,7 @@ class VirtualControllerButton : UIView {
             // }
             
             switch self {
-            case .a, .b, .x, .y, .minus, .plus, .dpadUp, .dpadLeft, .dpadDown, .dpadRight:
+            case .a, .b, .x, .y, .e, .minus, .plus, .dpadUp, .dpadLeft, .dpadDown, .dpadRight:
                 rawValue.appending(".circle.fill")
             case .l, .zl, .r, .zr:
                 if #available(iOS 17, *) {

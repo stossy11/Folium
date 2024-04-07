@@ -234,6 +234,8 @@ class SudachiEmulationController : EmulationScreensController {
             sudachi.virtualControllerButtonDown(.plus)
         case .a:
             sudachi.virtualControllerButtonDown(.A)
+        case .e:
+            sudachi.virtualControllerButtonDown(.A) //i want it to do the same thing as a to test it
         case .b:
             sudachi.virtualControllerButtonDown(.B)
         case .x:
@@ -267,6 +269,8 @@ class SudachiEmulationController : EmulationScreensController {
         case .plus:
             sudachi.virtualControllerButtonUp(.plus)
         case .a:
+            sudachi.virtualControllerButtonUp(.A)
+        case .e:
             sudachi.virtualControllerButtonUp(.A)
         case .b:
             sudachi.virtualControllerButtonUp(.B)

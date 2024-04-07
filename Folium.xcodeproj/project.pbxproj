@@ -805,14 +805,15 @@
 					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
 				MARKETING_VERSION = 1.1.4;
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
+				"OTHER_LDFLAGS[sdk=*]" = "-lSudachi";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lSudachi";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.antique.Folium-Cytrus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Folium/Folium-Bridging-Header.h";
 				SWIFT_OBJC_INTEROP_MODE = objc;
@@ -833,7 +834,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z3ZEABYY6P;
+				DEVELOPMENT_TEAM = 4D52P7Z7YN;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Folium/Info.plist;
@@ -854,14 +855,15 @@
 					"$(PROJECT_DIR)/Folium/Dependencies/Dynamic\\ Libraries",
 				);
 				MARKETING_VERSION = 1.1.4;
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lCytrus";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.antique.Folium-Cytrus";
+				"OTHER_LDFLAGS[sdk=*]" = "-lSudachi";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-lSudachi";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stossy11.Folium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Folium/Folium-Bridging-Header.h";
 				SWIFT_OBJC_INTEROP_MODE = objc;

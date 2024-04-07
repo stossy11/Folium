@@ -16,7 +16,7 @@ class VirtualControllerView : UIView {
     
     fileprivate var leftThumbstickView, rightThumbstickView: UIView!
     
-    fileprivate var aButton, bButton, xButton, yButton: VirtualControllerButton!
+    fileprivate var aButton, bButton, xButton, yButton, eButton: VirtualControllerButton!
     
     fileprivate var minusButton, plusButton: VirtualControllerButton!
     
@@ -41,6 +41,7 @@ class VirtualControllerView : UIView {
             addDpadDown(false, buttonColor: console.buttonColors()[.dpadDown] ?? .systemGray)
             addDpadRight(false, buttonColor: console.buttonColors()[.dpadRight] ?? .systemGray)
             
+            addE(false, buttonColor: console.buttonColors()[.e] ?? .systemGray)
             addB(false, buttonColor: console.buttonColors()[.b] ?? .systemGray)
             addA(false, buttonColor: console.buttonColors()[.a] ?? .systemGray)
             addX(false, buttonColor: console.buttonColors()[.x] ?? .systemGray)
@@ -283,6 +284,18 @@ class VirtualControllerView : UIView {
             aButton.widthAnchor.constraint(equalTo: xybaView.widthAnchor, multiplier: 1 / 3),
             aButton.heightAnchor.constraint(equalTo: xybaView.heightAnchor, multiplier: 1 / 3),
             aButton.centerYAnchor.constraint(equalTo: xybaView.centerYAnchor)
+        ])
+    }
+    
+    fileprivate func addE(_ shouldHide: Bool, buttonColor: UIColor) {
+        eButton = .init(buttonColor: buttonColor, buttonType: .e, virtualButtonDelegate: virtualButtonDelegate, shouldHide: shouldHide)
+        xybaView.addSubview(eButton)
+        
+        addConstraints([
+            eButton.leadingAnchor.constraint(equalTo: xybaView.leadingAnchor),
+            eButton.bottomAnchor.constraint(equalTo: xybaView.bottomAnchor),
+            eButton.widthAnchor.constraint(equalTo: xybaView.widthAnchor, multiplier: 1 / 5),
+            eButton.heightAnchor.constraint(equalTo: xybaView.heightAnchor, multiplier: 1 / 5)
         ])
     }
     
