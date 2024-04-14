@@ -37,7 +37,7 @@ class VirtualControllerButton : UIView {
             }
         }
     }
-    
+
     var imageView: UIImageView!
     fileprivate var colors: UIImage.SymbolConfiguration
     fileprivate var pointSize: CGFloat

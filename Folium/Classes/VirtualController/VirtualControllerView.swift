@@ -16,7 +16,9 @@ class VirtualControllerView : UIView {
     
     fileprivate var leftThumbstickView, rightThumbstickView: UIView!
     
-    fileprivate var aButton, bButton, xButton, yButton, eButton: VirtualControllerButton!
+    fileprivate var aButton, bButton, xButton, yButton: VirtualControllerButton!
+    
+    fileprivate var eButton: VirtualControllerButton!
     
     fileprivate var minusButton, plusButton: VirtualControllerButton!
     
@@ -41,7 +43,7 @@ class VirtualControllerView : UIView {
             addDpadDown(false, buttonColor: console.buttonColors()[.dpadDown] ?? .systemGray)
             addDpadRight(false, buttonColor: console.buttonColors()[.dpadRight] ?? .systemGray)
             
-            addE(false, buttonColor: console.buttonColors()[.e] ?? .systemGray)
+            addE(false, buttonColor: console.buttonColors()[.a] ?? .systemGray)
             addB(false, buttonColor: console.buttonColors()[.b] ?? .systemGray)
             addA(false, buttonColor: console.buttonColors()[.a] ?? .systemGray)
             addX(false, buttonColor: console.buttonColors()[.x] ?? .systemGray)
@@ -298,6 +300,7 @@ class VirtualControllerView : UIView {
             eButton.heightAnchor.constraint(equalTo: xybaView.heightAnchor, multiplier: 1 / 5)
         ])
     }
+
     
     fileprivate func addMinus(_ shouldHide: Bool, buttonColor: UIColor) {
         minusButton = .init(buttonColor: buttonColor, buttonType: .minus, virtualButtonDelegate: virtualButtonDelegate, shouldHide: shouldHide)

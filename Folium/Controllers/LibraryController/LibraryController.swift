@@ -11,6 +11,7 @@ import MetalKit
 #if canImport(Sudachi)
 import Sudachi
 #endif
+import SwiftUI
 import UIKit
 
 struct Help : Comparable, Hashable, Identifiable {
@@ -36,12 +37,12 @@ struct Help : Comparable, Hashable, Identifiable {
 class LibraryController : UICollectionViewController {
     var dataSource: UICollectionViewDiffableDataSource<AnyHashable, AnyHashable>! = nil
     var snapshot: NSDiffableDataSourceSnapshot<AnyHashable, AnyHashable>! = nil
-    
+
     var cores: [Core]
     
     fileprivate var menu: UIMenu {
         .init(children: [
-            UIAction(title: "TrollStore", state: UserDefaults.standard.bool(forKey: "useTrollStore") ? .on : .off, handler: { _ in
+            UIAction(title: "Enable Unnoficial RAM Patch", state: UserDefaults.standard.bool(forKey: "useTrollStore") ? .on : .off, handler: { _ in
                 UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: "useTrollStore"), forKey: "useTrollStore")
                 
                 self.navigationItem.setLeftBarButton(.init(image: .init(systemName: "gearshape.fill"), menu: self.menu), animated: true)
@@ -66,11 +67,7 @@ class LibraryController : UICollectionViewController {
         
         navigationItem.setLeftBarButton(.init(image: .init(systemName: "gearshape.fill"), menu: menu), animated: true)
         let systemVersion = UIDevice.current.systemVersion
-        if systemVersion == "14.0" || (systemVersion >= "15.0" && systemVersion < "16.7") || systemVersion == "17.0" {
             navigationItem.leftBarButtonItem?.isEnabled = true
-        } else {
-            navigationItem.leftBarButtonItem?.isEnabled = false
-        }
         
         let refreshControl = UIRefreshControl(frame: .zero, primaryAction: .init(handler: { action in
             guard let refreshControl = action.sender as? UIRefreshControl else {

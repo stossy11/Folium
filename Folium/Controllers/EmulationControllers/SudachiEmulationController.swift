@@ -288,10 +288,11 @@ class SudachiEmulationController : EmulationScreensController {
             sudachi.virtualControllerButtonUp(.triggerZR)
         }
     }
-    func exit() {
+   func exit() {
         self.dismiss(animated: true)
         isRunning = false
         thread.cancel()
+        sudachi.bootOS1()
     }
 }
 

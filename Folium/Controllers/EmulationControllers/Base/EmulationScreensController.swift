@@ -143,7 +143,7 @@ class EmulationScreensController : EmulationVirtualControllerController {
         view.insertSubview(primaryBlurredScreen, belowSubview: visualEffectView)
         
         portraitConstraints = [
-            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             primaryScreen.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             primaryScreen.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             primaryScreen.heightAnchor.constraint(equalTo: primaryScreen.widthAnchor, multiplier: 2 / 3),
@@ -329,15 +329,10 @@ class EmulationScreensController : EmulationVirtualControllerController {
         ]
         
         landscapeConstraints = [
-            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            primaryScreen.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            primaryScreen.widthAnchor.constraint(equalTo: primaryScreen.heightAnchor, multiplier: 16 / 9),
-            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
-            primaryBlurredScreen.topAnchor.constraint(equalTo: view.topAnchor),
-            primaryBlurredScreen.leadingAnchor.constraint(equalTo: primaryScreen.leadingAnchor, constant: -10),
-            primaryBlurredScreen.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            primaryBlurredScreen.trailingAnchor.constraint(equalTo: primaryScreen.trailingAnchor, constant: 10)
+            primaryScreen.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            primaryScreen.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 25),
+            primaryScreen.widthAnchor.constraint(equalTo: primaryScreen.heightAnchor, multiplier: 21 / 2), // iPhone 12 screen ratio
+            primaryScreen.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ]
         
         view.addConstraints(UIApplication.shared.statusBarOrientation == .portrait ||
